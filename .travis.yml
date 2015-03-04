@@ -17,8 +17,7 @@ before_install:
 - npm install hexo-cli -g
 - git clone https://github.com/metavige/metavige.github.io.git .deploy_git
 script:
-- hexo generate
-- hexo deploy
+- hexo generat --deploy
 branches:
   only:
   - master
