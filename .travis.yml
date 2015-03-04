@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- '0.10'
+before_install:
+- git config --global user.name "metavige"
+- git config --global user.email metavige@gmail.com
+- git config --global push.default simple
+- npm install hexo-cli -g
+- npm install .
+- git clone https://github.com/metavige/metavige.github.io.git .deploy
+
+script:
+- hexo generate
+- hexo deploy
+i
+branches:
+  only:
+    - master
+
+env:
+  global:
+    secure: EhnDSUz5CRxSZrZLojKoUu7oPVkBiwvWkjGHG64t2ULDTRUtamhpAYSFn8JIDeIdFvYbp5KpBD0WeLJQhS+6Bd8Vxd3NML6ol6y99iFWAokV1MlfFAkCWcDK+aEz2UP51CJiYqE53kDsSh1huDf+KX+7sjpkWOPza5tWTTYgA/g=
