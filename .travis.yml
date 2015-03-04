@@ -12,7 +12,7 @@ before_install:
 script:
 - hexo generate
 - hexo deploy
-i
+
 branches:
   only:
     - master
