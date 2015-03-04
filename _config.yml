@@ -7,7 +7,7 @@ title: metavige's page
 subtitle:
 description:
 author: metavige (Ricky Chiang)
-language:
+language: 
 timezone:
 
 # URL
@@ -68,4 +68,4 @@ theme: landscape
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/metavige/metavige.github.io.git
+  repo: git@github.com:metavige/metavige.github.io.git
