@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '0.12'
 before_install:
+- mkdir ~/.ssh 
 - openssl aes-256-cbc -K $encrypted_b48f58bb6465_key -iv $encrypted_b48f58bb6465_iv -in .travis/ssh_key.enc -out ~\/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
 - eval $(ssh-agent)
