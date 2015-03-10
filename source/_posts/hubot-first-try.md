@@ -3,9 +3,8 @@ date: 2013-12-17 00:06:00
 categories:
 - 程式開發
 tags:
-- git
-- nodejs
-- redis
+- Git
+- Nodejs
 ---
 
 最近剛好想學 CoffeeScript，前幾天又看到有 hubot 的新聞，所以就想說來玩一下 [Hubot](http://hubot.github.com/)

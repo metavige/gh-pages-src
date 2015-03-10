@@ -2,7 +2,7 @@ title: "5 javascript debugging tips you'll start using today"
 date: 2014-03-07 08:11:00
 categories:
 - 程式開發
-tags: javascript
+tags: Javascript
 ---
 
 這是前幾天在網路上看到的一篇文章，我懶得翻譯標題的部份 (其實我不太會翻譯)

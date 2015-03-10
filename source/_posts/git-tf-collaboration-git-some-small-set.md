@@ -3,8 +3,8 @@ date: 2014-07-16 20:04:00
 categories:
 - 程式開發
 tags:
-- mac
-- git
+- Mac
+- Git
 ---
 
 本身有用 Windows, Mac 在開發系統，我其實是偏好在 Mac 編輯，因為我喜歡 [Sublime Text](http://www.sublimetext.com/3) !!!
