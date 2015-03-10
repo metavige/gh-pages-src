@@ -7,7 +7,7 @@ widgets:
 - category
 - tag
 
-excerpt_link: Read More
+excerpt_link: 閱讀全文
 
 twitter:
   username: metavige
@@ -28,6 +28,7 @@ google_analytics:
 rss:
 
 comment_provider: facebook
+
 # Facebook comment
 facebook:
   appid: 123456789012345
