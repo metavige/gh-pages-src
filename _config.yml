@@ -77,9 +77,6 @@ pagination_dir: page
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
 theme: light
 
-# Disqus Disqus插件
-disqus_shortname: metavige
-
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
