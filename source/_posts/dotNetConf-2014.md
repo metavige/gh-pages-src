@@ -13,6 +13,9 @@ tags: .Net
 - [New Innovation in .Net](http://channel9.msdn.com/Events/dotnetConf/2014/New-Innovations-in-NET-Runtime)
 
 老實說改變很大
+
+<!--more-->
+
 - 因為之前 Asp.Net, Asp.Net MVC, WebForm 的相似度太大，但是程式碼是分開的，因為是階段性做出來的，所以現在要整合了～感覺上，Java 學起來比較累，但是，就是因為他一切從簡，所以才有擴充的空間。dotNet 的問題大概就是，想整合太多東西，現在包袱很重.....所以現在要來個大改版～
 - 終於，dotNet 開源了～而且，也考慮到非 Windows 的用戶，所以 .Net Runtime 也要改版，準備要在不同平台上面 Run
 - 蠻多東西，感覺上 Java 好像都已經做過了，所以表示，語言也是互相學習的。像是 Java 8 最近的新 feature 就是學習 C# 不少～

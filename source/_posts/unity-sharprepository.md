@@ -10,6 +10,8 @@ tags:
 
 最近在學習使用 [SharpRepository](https://github.com/SharpRepository/SharpRepository)，剛好專案中有使用 IoC Container - Unity, 所以需要把兩者做一個結合
 
+<!--more-->
+
 不過，實際使用了 SharpRepository.Ioc.Unity 這個 Package，卻發現這個專案並沒實作到與 Unity 結合的部分，實際看了一下程式碼，才發現作者做了以下的註解：
 
 > using InjectionFactory I can get access to the container but I don't seem to ahve access to a context

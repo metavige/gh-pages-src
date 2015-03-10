@@ -9,6 +9,8 @@ tags:
 
 最近剛好想學 CoffeeScript，前幾天又看到有 hubot 的新聞，所以就想說來玩一下 [Hubot](http://hubot.github.com/)
 
+<!--more-->
+
 安裝步驟很簡單
 
 1. 請先安裝 Nodejs/Redis (Google 一下，有太多資料了.....)

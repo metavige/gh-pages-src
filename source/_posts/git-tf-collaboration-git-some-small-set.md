@@ -13,6 +13,8 @@ tags:
 有些時候，不想使用笨重的 VS2013，像是開發 Web Project，我還是喜歡用 [Sublime Text](http://www.sublimetext.com/3) 編輯，像是 javascript/html 都有不錯的開發經驗～
 所以只好用 [git-tf](https://gittf.codeplex.com) 來做界接～
 
+<!--more-->
+
 要在 Mac 上安裝 [git-tf](https://gittf.codeplex.com) 很容易，你只需要使用 [brew](http://brew.sh) 就可以安裝
 
 ```bash
