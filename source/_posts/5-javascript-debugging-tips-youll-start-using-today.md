@@ -33,9 +33,9 @@ for(var i in [1,2,3,4,5]) {
 ![](https://31.media.tumblr.com/b1d973ed9acfaeca5ebf67188037b1e2/tumblr_inline_n1s6xpVmg21r2dr7s.png)
 
 設定的選項有三種：  
-    1. 子節點變更的時候 (Subtree Modifications)  
-    2. 屬性變更的時候 (Attributes Modifications)  
-    3. 節點被刪除的時候 (Node Removal)  
+1. 子節點變更的時候 (Subtree Modifications)  
+2. 屬性變更的時候 (Attributes Modifications)  
+3. 節點被刪除的時候 (Node Removal)  
     
 Cool~
 
@@ -51,7 +51,7 @@ Chrome 有個蠻不錯的功能，就是能模擬不同的裝置，你可以利�
 
 要使用這個功能，你要先開啟開發者工具，然後選擇除了 Console 以外的 Tab，接下來按下 ESC 鍵，就會在下方開啟如圖的小頁籤出來，這時候就可以選擇 "Emulation" ，選擇不同的 Device 來模擬～  
 
-![](https://www.evernote.com/shard/s1/sh/8594c22d-3b0b-4b3e-82f2-764eed355534/b0d0eb214b8f5ccba0193b91f76c2e41/res/82273484-575b-4dd5-8a53-774011c8fffd/skitch.png?resizeSmall&width=832)
+![](/2014/03/07/5-javascript-debugging-tips-youll-start-using-today/skitch.png)
 
 ### 5. 讓你的網站效能更好
 
