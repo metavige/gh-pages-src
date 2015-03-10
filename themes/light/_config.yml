@@ -16,7 +16,6 @@ twitter:
 
 addthis:
   enable: true
-  pubid:
   facebook: true
   twitter: true
   google: true
@@ -25,7 +24,7 @@ addthis:
 fancybox: true
 
 google_analytics:
-rss:
+rss: true
 
 comment_provider: facebook
 

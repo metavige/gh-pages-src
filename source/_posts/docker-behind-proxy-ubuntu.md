@@ -5,8 +5,8 @@ categories:
 tags: Docker
 ---
 
-編輯 /etc/default/docker
-把以下 export http_proxy 的那一行 unmark, 然後改成你的 proxy 設定
+編輯 `/etc/default/docker`  
+把以下 `export http_proxy` 的那一行 unmark, 然後改成你的 proxy 設定  
 
 ```bash
 # Docker Upstart and SysVinit configuration file

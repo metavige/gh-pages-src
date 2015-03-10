@@ -6,7 +6,7 @@ tags:
 - Mac
 ---
 
-執行以下指令就可以～
+執行以下指令就可以～  
 
 ```bash
 sudo networksetup -setdnsservers "iPhone USB" 8.8.8.8
