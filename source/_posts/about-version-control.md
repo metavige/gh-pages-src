@@ -1,9 +1,9 @@
 title: "版本管理的一些觀念說明"
 date: 2011-07-13 15:31:00
 categories:
-- 程式設計
+- 程式開發
 tags:
-- Version Control
+- VCS
 ---
 
 前幾天跟公司內部同事分享了一些版本管理的觀念  
