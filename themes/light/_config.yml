@@ -25,10 +25,10 @@ addthis:
 
 fancybox: true
 
-google_analytics:
+google_analytics: UA-60626505-1
 rss: true
 
-comment_provider: 
+comment_provider:
 
 # Facebook comment
 facebook:
