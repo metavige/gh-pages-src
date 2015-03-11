@@ -1,13 +1,15 @@
 menu:
   Home: /
   Archives: /archives
+  RSS: /atom.xml
 
 widgets:
 - search
 - category
 - tag
+- tagcloud
 
-excerpt_link: 閱讀全文
+excerpt_link: 還有...
 
 twitter:
   username: metavige
@@ -19,14 +21,14 @@ addthis:
   facebook: true
   twitter: true
   google: true
-  pinterest: true
+  pinterest: false
 
 fancybox: true
 
 google_analytics:
 rss: true
 
-comment_provider: facebook
+comment_provider: 
 
 # Facebook comment
 facebook:
