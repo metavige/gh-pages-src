@@ -1,5 +1,5 @@
 title: "log4net Action Log 設定"
-date: 2015-03-25 04:54:33
+date: 2015-03-25 09:00:00
 categories:
 - 程式開發
 tags:
