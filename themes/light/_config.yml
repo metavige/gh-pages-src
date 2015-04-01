@@ -22,6 +22,7 @@ addthis:
   twitter: true
   google: true
   pinterest: false
+  filpboard: true
 
 fancybox: true
 

@@ -21,111 +21,10 @@ tags:
 <!--more-->
 
 
-使用方式是可以參考他 Source 裡面的 Examples 專案  
-
-不過要使用這個之前，基本上是要替 DbContext 做一個介面，把 *IDbSet<T>* 的屬性都改成介面屬性  
+設定 `DbContext` 的方式，是可以參考他 Source 裡面的 Examples 專案 (所以這邊就不把程式碼貼出來了，可以到 [AnotherFakeDbSet](https://www.nuget.org/packages/AnotherFakeDbSet/) 去下載)  
 
 
-範例如下:   
-    
-```csharp
-using System;
-using System.Data.Entity;
-
-namespace Example.Data
-{
-	/// <summary>
-	/// The interface which data access code works against (data access code uses 
-	/// IBookStoreEntities rather than BookStoreEntities).
-	/// </summary>
-	public interface IBookStoreEntities : IDisposable
-	{
-		IDbSet<Author> Authors { get; set; }
-		IDbSet<Book> Books { get; set; }
-
-		int SaveChanges();
-	}
-}
-```
-
-
-實作類別:     
-  
-  
-```csharp  
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Entity;
-
-namespace Example.Data
-{
-	/// <summary>
-	/// The real database implementation (as opposed to FakeDatabase).  Note that
-	/// we implement the IBookStoreEntities interface here as well as inheriting
-	/// from DbContext.
-	/// </summary>
-	public class BookStoreEntities : DbContext, IBookStoreEntities
-	{
-		public IDbSet<Book> Books { get; set; }
-		public IDbSet<Author> Authors { get; set; }
-	}
-}
-```
-
-測試用的 DbContext:  
-  
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Example.Data;
-using FakeDbSet;
-using System.Data.Entity;
-
-namespace Example.BusinessLogicTest
-{
-	/// <summary>
-	/// This is an example of how we'd create a fake database by implementing the 
-	/// same interface that the BookeStoreEntities class implements.
-	/// </summary>
-	public class FakeDatabase : IBookStoreEntities
-	{
-		/// <summary>
-		/// Sets up the fake database.
-		/// </summary>
-		public FakeDatabase()
-		{
-			// We're setting our DbSets to be InMemoryDbSets rather than using SQL Server.
-			this.Authors = new InMemoryDbSet<Author>();
-			this.Books = new InMemoryDbSet<Book>();
-		}
-
-		public IDbSet<Author> Authors { get; set; }
-		public IDbSet<Book> Books { get; set; }
-
-		public int SaveChanges()
-		{
-			// Pretend that each entity gets a database id when we hit save.
-			int changes = 0;
-			changes += DbSetHelper.IncrementPrimaryKey<Author>(x => x.AuthorId, this.Authors);
-			changes += DbSetHelper.IncrementPrimaryKey<Book>(x => x.BookId, this.Books);
-
-			return changes;
-		}
-
-		public void Dispose()
-		{
-			// Do nothing!
-		}
-	}
-}
-```
-
-
-不過在自己程式裡面，要使用 *DbContext* 的時候，就不能像是以下的程式一樣直接使用，因為這樣就無法測試了   
+在自己程式裡面，要使用 `DbContext` 的時候，就不能像是以下的程式一樣直接使用，因為這樣就無法測試了   
 
 ```csharp
 using(var context = new BookStoreEntities()) {
@@ -134,7 +33,7 @@ using(var context = new BookStoreEntities()) {
 ```
 
 
-我自己的方式，是採用類似 *Provider* 的概念來做。       
+我自己的方式，是採用類似 `Provider` 的概念來做。        
 
 ```csharp
 public class BookServiceImpl : IBookService {
@@ -161,4 +60,5 @@ public class BookServiceImpl : IBookService {
 ```
 
 
-這樣子，你如果測試的時候要抽換就會變得很容易（當然，如果你要使用類似 IoC 的 framework 實作也 OK~）    
+這樣子，你如果測試的時候要抽換就會變得很容易  
+（當然，如果你要使用類似 IoC 的 framework 實作也 OK~）    

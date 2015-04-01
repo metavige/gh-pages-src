@@ -10,6 +10,12 @@ tags:
 
 <!--more-->
 
+```
+Install-Package Microsoft.AspNet.WebApi.Owin
+Install-Package Microsoft.Owin.Security.Jwt
+Install-Package Microsoft.Owin.Host.SystemWeb
+```
+
 - 先開啟一個 Asp.Net Web 的專案，記得選擇 Web API
 - 驗證的部份可以不選，只要注意要安裝的 packages (這邊不講預設的 packages)
     - [Microsoft.AspNet.WebApi.Owin](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Owin/) - 3.0.0 
