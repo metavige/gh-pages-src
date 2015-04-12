@@ -144,6 +144,9 @@ Email Address []: [這邊填電子郵件]
 然後，找到 subnet-id   
 這就是 --amazonec2-subnet-id 參數  
 
+> 2014-04-12 14:50 更正：
+> 根據 Docker 官網文件，以及實際測試結果，其實，subnet-id 並不是必要條件，所以，其實可以不要輸入～這也就是我為什麼之前有個疑問是，我自己建立了一個 Network Interface，他卻又會另外建立一個新的 Network Interface 了～我本來以為 subnet-id 是要我提供的～
+
 ## Create a new docker-machine
 
 把之前的步驟找到的所有參數，組合在一起  
@@ -160,7 +163,6 @@ docker-machine create \
 --amazonec2-access-key [Access Key ID] \
 --amazonec2-secret-key [Secret Access Key] \
 --amazonec2-vpc-id [Default SecurityGroup VPC ID] \
---amazonec2-subnet-id [NetworkInterface Subnet ID] \
 --amazonec2-region ap-southeast-1 \
 --amazonec2-zone b \
 ec2box
@@ -170,9 +172,15 @@ ec2box
 
 ![EC2 Instance](ec2-instance.png)  
 
-> 2015-04-12 附註：
-> 
-> 其實最後兩步驟，抓 subnet-id 跟 vpc-id 是我比較不解的地方，因為其實他並不會使用到 default security group 以及我建立的 network interface，而是又另外建立一組新的 security group 跟 network interface，不過，因為可以用，我暫時沒有去找原因～  
+## 玩完回收
+
+```shell
+docker-machine rm -f ec2box 
+```
+
+這個指令會把之前建立的 ec2 instance 以及相關的設定都刪掉    
+因為 [AWS] 要錢，所以～如果你只是玩玩就好，記得刪掉～  
+否則收到帳單，我也沒辦法.....   
 
 ## 建立時可能發生的問題
 
@@ -180,7 +188,12 @@ ec2box
 
 1. 有可能 docker-machine 資料已經建立，但是無法連上 [EC2]，這樣的話，你需要自己手動刪除 docker-machine，指令是 `docker-machine rm -f ec2box`。你可以先用 `docker-machine ls` 檢查一下～    
 2. 每次建立的時候，docker-machine 會與 [EC2] 交換 key-pair，所以如果建立到一半失敗，你得先自己手動到 [EC2] 把 ec2box 這個 keypair 刪掉再重新建立，不然就會發生 keypair 重複的問題。
-3. 如果發生 401 的錯誤，請檢查使用者的資料設定是否有問題 (是說按照步驟來應該可以)。   
+3. 如果發生 401 的錯誤，請檢查使用者的資料設定是否有問題 (是說按照步驟來應該可以)。  
+4. 你給的 vpc-id 一定要是你建立那個 region/zone 的 default security group vpc-id，不然會告訴你沒有這個 vpc-id 
+
+## 參考文件
+
+- [https://docs.docker.com/machine/?hc_location=ufi#amazon-web-services]()
 
 [AWS]: https://aws.amazon.com/tw/
 [IAM]: https://console.aws.amazon.com/iam/home
