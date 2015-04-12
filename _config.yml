@@ -99,4 +99,9 @@ feed:
     path: atom.xml
     limit: 20
 
+#disqus 留言
 disqus_shortname: metavigegitpages
+
+# livereload
+livereload:
+  port: 35729
