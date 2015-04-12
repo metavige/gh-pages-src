@@ -18,7 +18,7 @@ tags:
 然後直接可以用！   
 只要透過他的介面搜尋你要的 docker image name，就可以直接使用～  
 
-![Kitematic](kitematic.png)
+![Kitematic](Kitematic.png)
 
 我其實對這個 [Kitematic] 有興趣是因為，他是用 [Atom-Shell] 跟 [Reactjs] 做出來的！！！  
 所以 Source Code 應該是很有研究價值的～  
