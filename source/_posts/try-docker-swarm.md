@@ -2,6 +2,7 @@ title: "Try Docker Swarm"
 date: 2015-04-29 20:40:01
 tags:
 - Docker
+- Mac
 ---
 
 [Docker] 最近出了 1.6 版，[Docker Swarm] 也隨之更新了。  
