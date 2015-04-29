@@ -7,7 +7,7 @@ tags:
 [Docker] 最近出了 1.6 版，[Docker Swarm] 也隨之更新了。  
 
 參考了以下的網站，自己嘗試做做看～  
-原文連結: [https://www.voxxed.com/blog/2015/04/clustering-using-docker-swarm-0-2-0/]() 
+[原文連結](https://www.voxxed.com/blog/2015/04/clustering-using-docker-swarm-0-2-0/) 
 
 <!--more-->
 
