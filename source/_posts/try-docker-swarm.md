@@ -134,18 +134,6 @@ docker-machine upgrade swarm-master
 
 然後等它做完，重新啟動 docker-machine 就好～ (建議是要重新啟動，因為我不重新啟動就不能用～)    
 
-另外，像我自己是用 [fish] 這套 shell，所以 `docker-machine` 建立新 vm 的結尾指令，就會根據你目前的 shell 結果來告訴你怎樣連線到 vm  
-像是我的就會是這樣:  
-
-```bash
-docker-machine env swarm-master | source
-```
-
-如果是 bash，就會是下面這樣:   
-
-```bash
-eval "$(docker-machine env swarm-master)"
-```
 
 [Docker Swarm]: https://docs.docker.com/swarm/
 [Docker]: https://www.docker.com
