@@ -18,10 +18,19 @@ tags:
 
 這邊實作的是與 docker-machine 結合的部分  
 
+* 先產生一個 token
+
+```bash
+$ docker run swarm create
+c745d2d1bd2f65579e41f3808533da86
+```
+
+接下來複製上面產生的 Token，後面要用到
+
 * 先建立 swarm-master  
 
 ```bash
-$ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://117c8d19ba140d7ba3259aae9012e22f swarm-master
+$ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://c745d2d1bd2f65579e41f3808533da86 swarm-master
 INFO[0000] Creating SSH key...
 INFO[0000] Creating VirtualBox VM...
 INFO[0010] Starting VirtualBox VM...
@@ -33,7 +42,7 @@ INFO[0087] To point your Docker client at it, run this in your shell: docker-mac
 * 接下來分別建立 swarm-node01, swarm-node02  
 
 ```bash
-$  docker-machine create -d virtualbox --swarm --swarm-discovery token://117c8d19ba140d7ba3259aae9012e22f swarm-node-01
+$  docker-machine create -d virtualbox --swarm --swarm-discovery token://c745d2d1bd2f65579e41f3808533da86 swarm-node-01
 INFO[0000] Creating SSH key...
 INFO[0000] Creating VirtualBox VM...
 INFO[0010] Starting VirtualBox VM...
@@ -43,7 +52,7 @@ INFO[0073] To point your Docker client at it, run this in your shell: docker-mac
 ```
 
 ```bash
-$ docker-machine create -d virtualbox --swarm --swarm-discovery token://117c8d19ba140d7ba3259aae9012e22f swarm-node-02
+$ docker-machine create -d virtualbox --swarm --swarm-discovery token://c745d2d1bd2f65579e41f3808533da86 swarm-node-02
 INFO[0000] Creating SSH key...
 INFO[0000] Creating VirtualBox VM...
 INFO[0010] Starting VirtualBox VM...
@@ -102,18 +111,13 @@ Nodes: 3
 * 可以用下面的指令列出 swarm 的 node，如果你有建立兩個以上的 swarm-master，用的是你建立 swarm-master 的 token 來區分     
 
 ```bash
-$ docker run swarm list token://117c8d19ba140d7ba3259aae9012e22f
-192.168.99.108:2376
-192.168.99.109:2376
-192.168.99.110:2376
+$ docker run swarm list token://c745d2d1bd2f65579e41f3808533da86
 192.168.99.104:2376
 192.168.99.102:2376
 192.168.99.103:2376
 ```
-這邊是我跟原文不一樣的地方，就是我列出了六個～    
-我目前還找不到另外的 108, 109, 110 是哪邊的～  
-根據上一個指令列出來的是 102, 103, 104 才對～～～   
-
+  
+{% alert info %} 2015-05-02 更新，我之前因為使用 token 是用原文的範例指令直接執行，所以，註冊 Swarm 的時候，會與原本註冊的資料重複，如果自己產生一組 Token 就不會這樣了～{% endalert %}
 
 ## 後記
 
