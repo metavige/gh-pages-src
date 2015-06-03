@@ -1,6 +1,7 @@
 title: "Homebrew - Github Rate Limit Exceeded....."
 date: 2015-06-02 09:06:51
 tags:
+- Mac
 ---
 
 早上使用 brew 發生錯誤  
