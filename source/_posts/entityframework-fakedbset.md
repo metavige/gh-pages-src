@@ -32,33 +32,9 @@ using(var context = new BookStoreEntities()) {
 }
 ```
 
+我自己的方式，是採用類似 `Provider` 的概念來做。     
 
-我自己的方式，是採用類似 `Provider` 的概念來做。        
-
-```csharp
-public class BookServiceImpl : IBookService {
-
-  public Func<IBookStoreEntities> DbContextProvider { get; set; }
-  
-  public BookServiceImpl() {
-    DbContextProvider = () => new BookStoreEntities();
-  }
-
-  public void SaveBook() {
-  
-    // use provider to provide DbContext
-    using(var context = GetDbContext()) {
-      // Code...
-    }  
-  }
-  
-  private IBookStoreEntities GetDbContext() {
-    return _dbContextProvider.Invoke(); 
-  }
-  
-}
-```
-
+{% gist 8d1c580a1cdf96a4bddd %}
 
 這樣子，你如果測試的時候要抽換就會變得很容易  
 （當然，如果你要使用類似 IoC 的 framework 實作也 OK~）    

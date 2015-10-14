@@ -148,8 +148,8 @@ app.listen(port, function(error) {
 });
 ```
 
-本來想說測試一下，直接 run 一下 ```node server.js``` 看看有沒有問題，結果就出現了下面的錯誤：  
-
+本來想說測試一下，直接 run 一下 node server.js 看看有沒有問題，結果就出現了下面的錯誤：  
+  
 ```
 ==> 🌎  Listening on port 3000. Open up http://localhost:3000/ in your browser.
 webpack built 9cc6533f9b26bec5e1ce in 190ms
@@ -179,7 +179,7 @@ Module not found: Error: Cannot resolve 'file' or 'directory' ./index in /Volume
 touch index.js
 ```
 
-再執行 ```node server.js```，感覺上就正常了！   
+再執行 node server.js，感覺上就正常了！   
 
 ```
 ==> 🌎  Listening on port 3000. Open up http://localhost:3000/ in your browser.
