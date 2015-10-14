@@ -215,7 +215,7 @@ webpack built 1e04a7ed2baa7052b68b in 8ms
 不過，記得這只是在開發階段方便而已，Production 階段還是要產生實體的 bundle.js 檔案  
 
 就如同  [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 的 README 就說到：  
-> THIS MIDDLEWARE SHOULD ONLY USED FOR DEVELOPMENT!
+> THIS MIDDLEWARE SHOULD ONLY USED FOR DEVELOPMENT!  
 > DO NOT USE IT IN PRODUCTION!
 
 ## 第一天結後心得
