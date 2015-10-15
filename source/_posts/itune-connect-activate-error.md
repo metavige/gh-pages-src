@@ -22,7 +22,11 @@ tags:
 https://idmsauth-stable.corp.apple.com/appleauth/dist/web/jsapi/authService.js?cache=xxxxxxx
 ```
 
-就是 idmsauth-stable.corp.apple.com 解析不到！  
+就是 idmsauth-stable.corp.apple.com 解析不到！  因為這個網址不是公開的網址 (?)  
+
+在 Apple 的論壇也有說明：  
+* https://forums.developer.apple.com/message/73056#73056
+* https://forums.developer.apple.com/message/73434#73434  
 
 ## 解決方法
 
