@@ -6,7 +6,7 @@ tags:
 
 為了要開發 App 上架，要設定 iTune Connect，收到了 Apple 這邊寄來的信，準備啟用 
 
-![](itune-connect-activate-error/itune_connect_activa.png)
+![](itune_connect_activa.png)
 
 點選了啟用連結 (activate your account) 之後，結果發生了兩光的問題！  
 畫面一片空白！  
@@ -31,12 +31,12 @@ https://idmsauth-stable.corp.apple.com/appleauth/dist/web/jsapi/authService.js?c
 ## 解決方法
 
 * 先打開 Safari 的 『顯示網頁資源』功能   
-  ![](itune-connect-activate-error/fix_1.png)
+  ![](fix_1.png)
 * 找到 main.js，然後複製 main.js 所有的程式。
 * 然後找到裡面 `idmsauth-stable.corp.apple.com` 的網址，改成 `idmsa.apple.com`  
-* 然後把改過的程式碼貼到主控台 ![](itune-connect-activate-error/fix_2.png)
+* 然後把改過的程式碼貼到主控台 ![](fix_2.png)
 * 接下來就可以看到這個畫面  
-  ![](itune-connect-activate-error/agreement.jpg)
+  ![](iagreement.jpg)
 * 同意之後，就算是成功了！
 
 ## 結語
