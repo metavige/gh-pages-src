@@ -36,7 +36,7 @@ https://idmsauth-stable.corp.apple.com/appleauth/dist/web/jsapi/authService.js?c
 * 然後找到裡面 `idmsauth-stable.corp.apple.com` 的網址，改成 `idmsa.apple.com`  
 * 然後把改過的程式碼貼到主控台 ![](fix_2.png)
 * 接下來就可以看到這個畫面  
-  ![](iagreement.jpg)
+  ![](agreement.jpg)
 * 同意之後，就算是成功了！
 
 ## 結語
