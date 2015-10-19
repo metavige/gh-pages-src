@@ -5,7 +5,7 @@ tags:
 - redux
 ---
 
-延續[前一天](../redux-study-day1)的學習，今天進入 Redux Day2!
+延續[前一天](/2015/10/14/redux-study-day1)的學習，今天進入 Redux Day2!
 
 <!--more-->
 

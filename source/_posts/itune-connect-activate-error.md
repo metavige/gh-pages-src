@@ -6,12 +6,12 @@ tags:
 
 為了要開發 App 上架，要設定 iTune Connect，收到了 Apple 這邊寄來的信，準備啟用 
 
+<!--more-->
+
 ![](itune_connect_activa.png)
 
 點選了啟用連結 (activate your account) 之後，結果發生了兩光的問題！  
 畫面一片空白！  
-
-<!--more-->
 
 ## 問題處理
 
