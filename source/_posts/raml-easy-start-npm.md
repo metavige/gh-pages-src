@@ -39,7 +39,18 @@ npm install -g api-designer
 透過這個 Api Designer 的 UI，可以很簡單的看出你編輯的 RAML 格式是否正確，如果不正確，這個 UI 就會提醒你錯誤發生的地方，並且在你編輯完後可以直接預覽～  
 (這邊不介紹這個 UI 的使用～～～)  
 
-> 不過我目前還有遇到的問題。這個介面是可以把 raml 檔案存起來，但是我找不到存檔的位置，目前只好笨笨的自己去複製 raml 文字內容，另存檔案。  
+更新：  
+根據 [Editor File System](https://github.com/mulesoft/api-designer/blob/master/docs/file-system.md) 這份文件說的，以及看了一下我自己瀏覽器的設定，才發現，這個 api designer 是把資料存在 LocalStorage 中  
+所以，它並不是把資料存在 server 端。  
+
+這有個好處是，大家可以共用同樣的 api designer UI 來編輯自己的文件格式，不用擔心會被別人改到  
+不過壞處也是一樣，別人無法編輯～  
+
+不過，根據這個好處，表示其實我可以很安心的自己做一個 docker image  
+這樣方便其他人使用  
+
+有需要的人可以自己下載～  (因為是用 alpine 為 base，所以只有 48.86 MB)  
+[https://github.com/metavige/alpine-api-designer]()
 
 ## 轉換 HTML
 
