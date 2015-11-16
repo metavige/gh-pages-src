@@ -68,3 +68,8 @@ raml2html -i example.raml -o example.html
 因為 RAML 1.0 好像是新的，不知道新的會不會有什麼問題，我也沒多加研究  
   
 之後等到文件內容都寫完了，再來研究自動化的部份以及新的 RAML 1.0 規格，像是不是可以結合 CI (Jenkins) ?  
+
+## Reference
+
+* [RAML 0.8](https://github.com/raml-org/raml-spec/blob/master/raml-0.8.md)
+* [RAML 1.0](http://docs.raml.org/specs/1.0/)
