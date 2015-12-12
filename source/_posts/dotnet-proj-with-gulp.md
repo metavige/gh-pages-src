@@ -3,6 +3,8 @@ date: 2015-12-12 09:58:06
 tags:
 - .Net
 - gulp
+categories:
+- 程式開發
 ---
 
 一直以來，開發 .Net 專案，因為只能在 Windows 上使用 Visual Studio 開發  
