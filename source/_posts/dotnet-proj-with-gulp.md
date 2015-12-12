@@ -61,3 +61,4 @@ gulp.task('default', ['build']);
 
 - [Using Gulp to Build and Deploy .NET Apps on Windows](http://www.mikeobrien.net/blog/using-gulp-to-build-and-deploy-dotnet-apps-on-windows/)
 - [gulp-msbuild](https://www.npmjs.com/package/gulp-msbuild)
+- [gulp-mstest](https://www.npmjs.com/package/gulp-mstest)
