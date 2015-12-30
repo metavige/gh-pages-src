@@ -77,7 +77,8 @@ node_modules/.bin/electron .
   目前 Electron Release 的版本是 0.36.2，可以到 [https://github.com/atom/electron/releases](https://github.com/atom/electron/releases) 去看  
 * `electron-packager` 命令列的說明可以參考 [usage.txt](https://github.com/maxogden/electron-packager/blob/master/usage.txt)
 * 到桌面看就會有檔案產生了，點兩下就可以執行了
-  ![Desktop](desktop-app1.png)
+  {% asset_img desktop-app1.png [Desktop] %} 
+
 
 ## 後語
 
