@@ -1,7 +1,7 @@
 title: "Proxy.pac is not working at Yosemite"
 date: 2015-04-24 13:32:30
 tags:
-- Mac
+- mac
 ---
 
 嘗試在本機設定 pac，結果搞了很久，才知道是 Yosemite 的問題～
@@ -20,10 +20,10 @@ networkd[340]: -[NETProxyLookup pacLookupComplete:proxies:error:] PAC evaluation
 [https://discussions.apple.com/thread/6642648]()
 
 重點就是，你的 pac 設定的時候，如果 Url 是 proxy.pac 結尾，就會發生問題！   
- 
+
 所以總結在 Yosemite 設定 pac 的作法  
 
-- pac 檔案要放在本機的 web server share~ 我是安裝了一個 nginx，用 8080 port share 
+- pac 檔案要放在本機的 web server share~ 我是安裝了一個 nginx，用 8080 port share
 - 測試過，不能用 file:////, 一定要是 http://   
 - 網址不可以是 proxy.pac 結尾  (喵的咧！！！ )
 - 可以用 google 的 pactester 測試 pac 的程式是不是寫對  

@@ -1,14 +1,14 @@
 title: "Try Docker Swarm"
 date: 2015-04-29 20:40:01
 tags:
-- Docker
-- Mac
+- docker
+- mac
 ---
 
 [Docker] 最近出了 1.6 版，[Docker Swarm] 也隨之更新了。  
 
 參考了以下的網站，自己嘗試做做看～  
-[原文連結](https://www.voxxed.com/blog/2015/04/clustering-using-docker-swarm-0-2-0/) 
+[原文連結](https://www.voxxed.com/blog/2015/04/clustering-using-docker-swarm-0-2-0/)
 
 <!--more-->
 
@@ -61,7 +61,7 @@ INFO[0070] "swarm-node-02" has been created and is now the active machine.
 INFO[0070] To point your Docker client at it, run this in your shell: docker-machine env swarm-node-02 | source
 ```
 * 執行後的結果  
- 
+
 ```bash
 $ docker-machine ls
 NAME            ACTIVE   DRIVER       STATE     URL                         SWARM
@@ -116,7 +116,7 @@ $ docker run swarm list token://c745d2d1bd2f65579e41f3808533da86
 192.168.99.102:2376
 192.168.99.103:2376
 ```
-  
+
 {% alert info %} 2015-05-02 更新，我之前因為使用 token 是用原文的範例指令直接執行，所以，註冊 Swarm 的時候，會與原本註冊的資料重複，如果自己產生一組 Token 就不會這樣了～{% endalert %}
 
 ## 後記

@@ -3,8 +3,8 @@ date: 2015-04-11 11:31:09
 categories:
 - 程式開發
 tags:
-- Mac
-- Vagrant
+- mac
+- vagrant
 ---
 
 簡單的在 Mac 安裝 [Vagrant] 環境

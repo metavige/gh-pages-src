@@ -1,7 +1,8 @@
 title: "redux-study-day2"
 date: 2015-10-19 20:03:15
 tags:
-- Javascript
+- javascript
+- reactjs
 - redux
 ---
 
@@ -77,11 +78,9 @@ function requestItemThreads () {
 		text: 'Requesting the top item threads'
 	}
 }
-``` 
+```
 
 ## 結語
 
 Action 其實在 Flux 的流程裡面是一個很重要的項目，但是不管是什麼 Flux framework，這個部分也都有，所以，不太難理解。  
 不過，因為 Redux 有一些方法可以做到 dispatch，在 Action 這邊也就變得很單純了～～～  
-
- 

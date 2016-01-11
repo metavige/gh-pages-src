@@ -1,8 +1,11 @@
 title: "Redux Study Day1"
 date: 2015-10-14 20:25:24
-tags: 
+tags:
+- javascript
 - reactjs
-- Javascript 
+- redux
+catalogs:
+- 程式開發
 ---
 
 準備開始學習使用 [Redux](https://github.com/rackt/redux)
@@ -149,7 +152,7 @@ app.listen(port, function(error) {
 ```
 
 本來想說測試一下，直接 run 一下 node server.js 看看有沒有問題，結果就出現了下面的錯誤：  
-  
+
 ```bash
 $ node server.js
 ==> 🌎  Listening on port 3000. Open up http://localhost:3000/ in your browser.
@@ -211,7 +214,7 @@ webpack built 1e04a7ed2baa7052b68b in 8ms
 其中，javascript 是使用了一個目前還沒產生的檔案  
 不過，透過 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)，這個檔案在你執行 server.js 的時候會動態產生  
 所有檔案，都會 on-fly 在記憶體中處理，不需要像以前一樣產生一堆暫存檔案  
-  
+
 不過，記得這只是在開發階段方便而已，Production 階段還是要產生實體的 bundle.js 檔案  
 
 就如同  [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 的 README 就說到：  
@@ -225,7 +228,7 @@ webpack built 1e04a7ed2baa7052b68b in 8ms
 不過才沒幾個月，一堆工具又出來了，雖然是為了 ES6 而產生的工具，但是還是覺得太多東西要學了   
  [webpack](https://webpack.github.io) 去年就聽過了，不過聽不太懂，所以本來是要放棄的。但是現在感覺好像又不是我之前聽過的那樣了～～～   
 變化真快     
-  
+
 之後可能還要對 [webpack](https://webpack.github.io) 多多了解一下....    
 
 至於 Redux 本身，大概又是另外一個難解的問題，需要好好了解了～  

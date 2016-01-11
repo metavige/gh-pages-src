@@ -1,6 +1,7 @@
 title: "快速撰寫好看的 REST API 文件 - 使用 RAML"
 date: 2015-11-16 15:02:53
 tags:
+- RESTful
 catalogs:
 - 程式開發
 ---
@@ -68,7 +69,7 @@ raml2html -i example.raml -o example.html
 
 如果你寫的很豐富，結果可能就會像是 raml2html 的範例一樣
 
-![Example](example.png) 
+![Example](example.png)
 
 ## 結語
 
@@ -77,7 +78,7 @@ raml2html -i example.raml -o example.html
 
 目前我使用的是 RAML 0.8 的版本，我想應該就夠了
 因為 RAML 1.0 好像是新的，不知道新的會不會有什麼問題，我也沒多加研究  
-  
+
 之後等到文件內容都寫完了，再來研究自動化的部份以及新的 RAML 1.0 規格，像是不是可以結合 CI (Jenkins) ?  
 
 ## Reference

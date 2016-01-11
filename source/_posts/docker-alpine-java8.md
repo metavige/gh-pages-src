@@ -1,7 +1,8 @@
 title: "Make Java 8 docker image based Alpinelinux "
 date: 2015-11-03 22:52:59
 tags:
-- Docker
+- docker
+- java
 ---
 
 製作 Java base docker image based [Alpinelinux](http://alpinelinux.org/)

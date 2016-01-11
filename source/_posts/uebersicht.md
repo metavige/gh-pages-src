@@ -1,7 +1,7 @@
 title: "Übersicht"
 date: 2015-04-20 21:45:46
 tags:
-- Mac
+- mac
 ---
 
 [Übersicht]，如果你用過 [Geektool]，你應該對這種工具不陌生。  

@@ -2,7 +2,8 @@ title: "5 javascript debugging tips you'll start using today"
 date: 2014-03-07 08:11:00
 categories:
 - 程式開發
-tags: Javascript
+tags:
+- javascript
 ---
 
 [原文出處](http://berzniz.com/post/78260747646/5-javascript-debugging-tips-youll-start-using-today)  

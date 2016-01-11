@@ -3,8 +3,8 @@ date: 2013-02-13 11:52:00
 categories:
 - 程式開發
 tags:
-- Javascript
-- Backbonejs
+- javascript
+- backbonejs
 ---
 
 在學習 Backbone 的時候，針對 Backbone 比較重要的一些事件、方法與屬性作個記錄  

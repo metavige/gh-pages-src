@@ -3,8 +3,8 @@ date: 2015-04-12 09:49:28
 categories:
 - 程式開發
 tags:
-- Docker
-- Aws
+- docker
+- AWS
 ---
 
 前兩天在公司上了 Introduction Docker 的課程，回家就來試驗新的 docker-machine   
@@ -35,12 +35,12 @@ OPTIONS:
    --amazonec2-vpc-id 													AWS VPC id [$AWS_VPC_ID]
    --amazonec2-zone "a"													AWS zone for instance (i.e. a,b,c,d,e) [$AWS_ZONE]  
 ```
-     
+
 最前面的，就是 aws 所需要的參數。  
 我找了一下網路的文章，發現這篇是有比較多的說明，針對 docker-machine provider 的部份  
-     
+
 [http://flurdy.com/docs/docker/docker_compose_machine_swarm_cloud.html]()  
-   
+
 按照這篇文章的作法，大概只需要以下的參數就可以  
 
 ```shell
@@ -69,7 +69,7 @@ ec2box
 建立之後，Group 的資料大概像這樣:    
 ![Create IAM Group](IAM_Management_Console_Group.png)
 
-### Create a user 
+### Create a user
 
 接下來建立一個 User， 你一次可以建立五個 User，不過我是先建立一個，接下來的畫面，蠻重要的，他會給你這個 User 的 Security Credentials，這就是我們要的資料了！  
 
@@ -113,7 +113,7 @@ Email Address []: [這邊填電子郵件]
 這樣會產生 kx, cert 檔案
 
 然後執行以下步驟  
-   
+
  ```shell
  openssl rsa -passin pass:a -in kx -out key
  ```
@@ -131,13 +131,13 @@ Email Address []: [這邊填電子郵件]
 ![User Detail for Sec](user_detail_sec.png)
 
 這樣，你就可以往下面做了～  
-  
+
  ## Vpc-ID
- 
+
 到 [EC2] 的介面，去抓到 default security group 的 vpc-id  
 這就是我們要用的 --amazonec2-vpc-id  
 
- ## Subnet-ID 
+ ## Subnet-ID
 
 到 [EC2] 的介面，到 Network Interfaces 功能，建立一組新的 Network Interface。  
 (因為蠻簡單的，都用預設值就可以)  
@@ -175,7 +175,7 @@ ec2box
 ## 玩完回收
 
 ```shell
-docker-machine rm -f ec2box 
+docker-machine rm -f ec2box
 ```
 
 這個指令會把之前建立的 ec2 instance 以及相關的設定都刪掉    
@@ -189,7 +189,7 @@ docker-machine rm -f ec2box
 1. 有可能 docker-machine 資料已經建立，但是無法連上 [EC2]，這樣的話，你需要自己手動刪除 docker-machine，指令是 `docker-machine rm -f ec2box`。你可以先用 `docker-machine ls` 檢查一下～    
 2. 每次建立的時候，docker-machine 會與 [EC2] 交換 key-pair，所以如果建立到一半失敗，你得先自己手動到 [EC2] 把 ec2box 這個 keypair 刪掉再重新建立，不然就會發生 keypair 重複的問題。
 3. 如果發生 401 的錯誤，請檢查使用者的資料設定是否有問題 (是說按照步驟來應該可以)。  
-4. 你給的 vpc-id 一定要是你建立那個 region/zone 的 default security group vpc-id，不然會告訴你沒有這個 vpc-id 
+4. 你給的 vpc-id 一定要是你建立那個 region/zone 的 default security group vpc-id，不然會告訴你沒有這個 vpc-id
 
 ## 參考文件
 

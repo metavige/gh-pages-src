@@ -3,7 +3,7 @@ date: 2010-09-20 18:30:00
 categories:
 - 思考
 tags:
-- Architecture
+- architecture
 ---
 
 近幾年來的感覺特別明顯，尤其是跟不太熟的人講的時候  

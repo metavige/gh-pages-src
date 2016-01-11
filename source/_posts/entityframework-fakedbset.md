@@ -3,14 +3,14 @@ date: 2015-03-25 11:56:15
 categories:
 - 程式開發
 tags:
-- C#
+- c#
 - EntityFramework
 ---
 
 為了單元測試，需要作假資料，如果用資料庫來做，就需要考慮測試資料的建立以及 Transaction 的問題，因為建立測試資料後還得刪除。     
-  
+
 所以可以使用 Mock 的方式，把 *IDbSet* 改成使用 InMemory   
-  
+
 目前 [Nuget.org]() 就有一個套件，可以幫忙你實作 *InMemorySet*   
 我目前是安裝 [AnotherFakeDbSet](https://www.nuget.org/packages/AnotherFakeDbSet/)，Source 在 [Github-AnotherFakeDbSet](https://github.com/realistschuckle/FakeDbSet)    
 

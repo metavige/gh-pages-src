@@ -4,7 +4,7 @@ categories:
 - 程式開發
 tags:
 - log4net
-- .Net
+- .net
 ---
 
 我之前設定網站執行的 Action Log 的一個記錄，有些東西都是拼拼湊湊出來的，並不見得是最佳版本     
@@ -39,26 +39,26 @@ log4net 設定檔
 </log4net>
 ```
 
-  
+
 其中要注意的是
 
 - log4net.Filter.LoggerMatchFilter: 用來設定特定的 class 記錄才使用這個 Appender  
     - acceptOnMatch: 這個設定有點像是 blacklist/whitelist，true 表示有 match 才是，相當於 whitelist  
     - LoggerToMatch: 設定要篩選的類別名稱  
 - log4net.Filter.DenyAllFilter: 篩選掉其他的 Log，不會在這個 Appender 裡面記錄  
-  
-  
+
+
 <!--more-->
 
 C# Filter 程式參考   
-  
+
 ```csharp
 /// <summary>
 /// 執行 Web Api 的呼叫記錄
 /// </summary>
 /// <remarks>
 /// 紀錄資料:
-/// 
+///
 ///     呼叫時間
 ///     USER
 ///     URL
@@ -66,7 +66,7 @@ C# Filter 程式參考
 ///     BODY
 ///     StatusCode
 ///     Duration
-/// 
+///
 /// Logger 的紀錄格式，參考 https://logging.apache.org/log4net/release/sdk/log4net.Layout.PatternLayout.html
 /// </remarks>
 public class WebApiActionFilter : ActionFilterAttribute
@@ -131,7 +131,7 @@ public class LogBodyDelegateHandler : DelegatingHandler
         if (request.Content != null)
         {
             var requestText = request.Content.ReadAsStringAsync();
-            
+
             WebApiActionFilter.RequestBody.Value = requestText;
         }
         // Execute the request, this does not block
