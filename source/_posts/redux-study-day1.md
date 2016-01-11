@@ -8,6 +8,9 @@ catalogs:
 - 程式開發
 ---
 
+* {% post_link redux-study-day1 Redux Day 1 - Start %}
+* {% post_link redux-study-day1 Redux Day 2 - Action %}
+
 準備開始學習使用 [Redux](https://github.com/rackt/redux)
 
 <!--more-->

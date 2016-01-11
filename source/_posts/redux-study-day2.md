@@ -8,7 +8,10 @@ catalogs:
 - 程式開發
 ---
 
-延續[前一天](/2015/10/14/redux-study-day1)的學習，今天進入 Redux Day2!
+* {% post_link redux-study-day1 Redux Day 1 - Start %}
+* {% post_link redux-study-day1 Redux Day 2 - Action %}
+
+延續{% post_link redux-study-day1 前一天 %}的學習，今天進入 Redux Day2!
 
 <!--more-->
 
