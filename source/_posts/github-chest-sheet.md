@@ -3,7 +3,7 @@ date: 2015-04-20 21:45:46
 categories:
 - 程式開發
 tags:
-- Git
+- git
 ---
 
 這是我今天幫忙 [https://github.com/tiimgreen/github-cheat-sheet]() 做一個簡單繁體中文版本的 PR，其實只是把簡體中文版本稍微轉換一下而已～
@@ -201,7 +201,7 @@ $ git clone https://gist.github.com/tiimgreen/10545817
 
 ![Gists](http://i.imgur.com/BcFzabp.png)
 
-這意味著你可以像 Github 倉庫一樣修改和更新 Gists : 
+這意味著你可以像 Github 倉庫一樣修改和更新 Gists :
 
 ```bash
 $ git commit
@@ -617,7 +617,7 @@ On branch master
 Changes not staged for commit:
 	deleted:    a
 	deleted:    c
-	
+
 $ git rm $(git ls-files -d)
 rm 'a'
 rm 'c'
@@ -794,7 +794,7 @@ $ git show :/typo
 $ git branch --merged
 ```
 
-這會顯示所有已經合併到你當前分支的分支列表。 
+這會顯示所有已經合併到你當前分支的分支列表。
 
 相反地：
 

@@ -3,8 +3,8 @@ date: 2015-04-12 13:41:59
 categories:
 - 程式開發
 tags:
-- Docker
-- Mac
+- docker
+- mac
 ---
 
 上個月底的新聞：  

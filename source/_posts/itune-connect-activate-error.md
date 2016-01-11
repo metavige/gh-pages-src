@@ -1,10 +1,10 @@
 title: "iTune Connect 啟用的兩光問題"
 date: 2015-10-15 13:26:54
 tags:
-- Mac
+- mac
 ---
 
-為了要開發 App 上架，要設定 iTune Connect，收到了 Apple 這邊寄來的信，準備啟用 
+為了要開發 App 上架，要設定 iTune Connect，收到了 Apple 這邊寄來的信，準備啟用
 
 <!--more-->
 

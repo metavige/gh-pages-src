@@ -1,7 +1,7 @@
 title: "Homebrew - Github Rate Limit Exceeded....."
 date: 2015-06-02 09:06:51
 tags:
-- Mac
+- mac
 ---
 
 早上使用 brew 發生錯誤  
@@ -27,5 +27,4 @@ and then set it as HOMEBREW_GITHUB_API_TOKEN.
 
 ```bash
 export HOMEBREW_GITHUB_API_TOKEN=9927d2878ffa105fc5236c762f2fd7zfd28b841d
-``` 
-
+```
