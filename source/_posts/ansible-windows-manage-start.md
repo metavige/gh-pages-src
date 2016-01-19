@@ -63,7 +63,7 @@ default ansible_connection=winrm ansible_ssh_host=127.0.0.1 ansible_ssh_port=559
 
 ## 問題二  
 
-```
+```bash
 $ ansible windows -i hosts -m win_ping -vvvv
 default | FAILED! => {
     "failed": true,
@@ -93,7 +93,7 @@ class CallbackModule(object):
 
 所以這次執行就成功了～  
 
-```
+```bash
 $ ansible windows -i hosts -m win_ping -vvvv
 default | SUCCESS => {
     "changed": false,
