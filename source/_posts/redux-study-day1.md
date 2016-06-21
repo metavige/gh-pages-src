@@ -1,4 +1,4 @@
-title: "Redux Study Day1"
+title: "Redux Study Day1 - Start"
 date: 2015-10-14 20:25:24
 tags:
 - javascript
@@ -8,8 +8,9 @@ catalogs:
 - 程式開發
 ---
 
-* {% post_link redux-study-day1 Redux Day 1 - Start %}
-* {% post_link redux-study-day1 Redux Day 2 - Action %}
+* {% post_link redux-study-day1 Redux Study Day 1 - Start %}
+* {% post_link redux-study-day2 Redux Study Day 2 - Action %}
+* {% post_link redux-study-day3 Redux Study Day 2 - Reducer %}
 
 準備開始學習使用 [Redux](https://github.com/rackt/redux)
 

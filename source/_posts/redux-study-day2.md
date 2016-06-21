@@ -1,4 +1,4 @@
-title: "redux-study-day2"
+title: "Redux Study Day2 - Action"
 date: 2015-10-19 20:03:15
 tags:
 - javascript
@@ -8,8 +8,9 @@ catalogs:
 - 程式開發
 ---
 
-* {% post_link redux-study-day1 Redux Day 1 - Start %}
-* {% post_link redux-study-day1 Redux Day 2 - Action %}
+* {% post_link redux-study-day1 Redux Study Day 1 - Start %}
+* {% post_link redux-study-day2 Redux Study Day 2 - Action %}
+* {% post_link redux-study-day3 Redux Study Day 2 - Reducer %}
 
 延續{% post_link redux-study-day1 前一天 %}的學習，今天進入 Redux Day2!
 
