@@ -10,13 +10,15 @@ catalogs:
 
 * {% post_link redux-study-day1 Redux Study Day 1 - Start %}
 * {% post_link redux-study-day2 Redux Study Day 2 - Action %}
-* {% post_link redux-study-day3 Redux Study Day 2 - Reducer %}
+* {% post_link redux-study-day3 Redux Study Day 3 - Reducer %}
+* {% post_link redux-study-day4 Redux Study Day 4 - Store %}
 
 準備開始學習使用 [Redux](https://github.com/rackt/redux)
 
 <!--more-->
 
 ## 開始準備
+
 * ECMAScript 6: [https://www.gitbook.com/book/wohugb/ecmascript-6/details]()  
 * Redux Github: [https://github.com/rackt/redux]()
 * Redux 的中文 gitbook: [http://chentsulin.github.io/redux/index.html]()

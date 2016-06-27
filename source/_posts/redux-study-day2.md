@@ -10,7 +10,8 @@ catalogs:
 
 * {% post_link redux-study-day1 Redux Study Day 1 - Start %}
 * {% post_link redux-study-day2 Redux Study Day 2 - Action %}
-* {% post_link redux-study-day3 Redux Study Day 2 - Reducer %}
+* {% post_link redux-study-day3 Redux Study Day 3 - Reducer %}
+* {% post_link redux-study-day4 Redux Study Day 4 - Store %}
 
 延續{% post_link redux-study-day1 前一天 %}的學習，今天進入 Redux Day2!
 
