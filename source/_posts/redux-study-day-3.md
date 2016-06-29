@@ -8,10 +8,10 @@ catalogs:
 - 程式開發
 ---
 
-* {% post_link redux-study-day1 Redux Study Day 1 - Start %}
-* {% post_link redux-study-day2 Redux Study Day 2 - Action %}
-* {% post_link redux-study-day3 Redux Study Day 3 - Reducer %}
-* {% post_link redux-study-day4 Redux Study Day 4 - Store %}
+* {% post_link redux-study-day1 %}
+* {% post_link redux-study-day2 %}
+* {% post_link redux-study-day-3 %}
+* {% post_link redux-study-day4 %}
 
 隔了半年多，重新真的找一個專案來實作 [Redux][]，不得不說，半年的變化  
 跟我當初看 [Redux][] 差異還是蠻大的。當然，觀念什麼的是差不多，只是可能很多程式碼會有所調整  

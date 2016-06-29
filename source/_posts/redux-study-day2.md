@@ -8,10 +8,10 @@ catalogs:
 - 程式開發
 ---
 
-* {% post_link redux-study-day1 Redux Study Day 1 - Start %}
-* {% post_link redux-study-day2 Redux Study Day 2 - Action %}
-* {% post_link redux-study-day3 Redux Study Day 3 - Reducer %}
-* {% post_link redux-study-day4 Redux Study Day 4 - Store %}
+* {% post_link redux-study-day1 %}
+* {% post_link redux-study-day2 %}
+* {% post_link redux-study-day-3 %}
+* {% post_link redux-study-day4 %}
 
 延續{% post_link redux-study-day1 前一天 %}的學習，今天進入 Redux Day2!
 
@@ -46,8 +46,8 @@ catalogs:
 
 ```javascript
 {
-    type: 'ADD TODO'.
-    payload" { text: 'new todo' }
+  type: 'ADD TODO'.
+  payload" { text: 'new todo' }
 }
 ```
 
@@ -80,10 +80,10 @@ function addTodo(text) {
 ```javascript
 export const REQUEST_ITEMTHREADS = 'REQUEST_ITEMTHREADS';
 function requestItemThreads () {
-	return {
-		type: REQUEST_ITEMTHREADS, // must have type
-		text: 'Requesting the top item threads'
-	}
+  return {
+    type: REQUEST_ITEMTHREADS, // must have type
+    text: 'Requesting the top item threads'
+  }
 }
 ```
 
