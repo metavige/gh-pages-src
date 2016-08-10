@@ -2,6 +2,8 @@ title: How to Get Node.js Logging Right
 date: 2016-05-31 21:24:33
 tags:
 - nodejs
+catalogs:
+- 程式開發
 ---
 
 [How to Get Node.js Logging Right](https://blog.risingstack.com/node-js-logging-tutorial/)
@@ -27,3 +29,4 @@ tags:
 
 
  
+
