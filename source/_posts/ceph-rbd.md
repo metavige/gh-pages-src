@@ -15,18 +15,20 @@ tags:
 apt-get install ceph-common
 ```
 
-目前在 ubuntu trusty 內安裝的版本是   
+目前在 ubuntu trusty 內安裝的版本是    
 
 ```
 $ rbd -v
 ceph version 0.80.11 (8424145d49264624a3b0a204aedb127835161070)
-```   
+```
+
 
 #### 建立 Image 動作 (假設 image name 是 test):  
 
 ```
 sudo rbd create --size <MB> test
 ```
+
 
 ##### Mapping 到 dev
 
