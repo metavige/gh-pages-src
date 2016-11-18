@@ -1,15 +1,17 @@
 title: ElasticSearch Curator
 date: 2016-11-18 13:34:30
 tags:
+- Docker
+- ElasticSearch
 ---
 
 [Curator](https://github.com/elastic/curator) 一個用來管理 ElasticSearch indices/snapshots 的工具
 
 <!--more-->
 
-之前有用這個來刪除 indices，但是因為之前用的指令比較簡單，都是統一刪除 21 天前的資料
-現在裡面資料比較複雜，所以需要做一些變化
-原本以為是不是下兩次指令就好，現在發現可以一次指定多個設定一次做～
+之前有用這個來刪除 indices，但是因為之前用的指令比較簡單，都是統一刪除 21 天前的資料  
+現在裡面資料比較複雜，所以需要做一些變化  
+原本以為是不是下兩次指令就好，現在發現可以一次指定多個設定一次做～  
 
 [參考文件 - Curator Guide](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/about.html)
 
@@ -41,8 +43,8 @@ logging:
 
 ### Action
 
-我這邊因為會有兩組 indices
-其中我想 topbeat 資料比較多，保留七天。
+我這邊因為會有兩組 indices  
+其中我想 topbeat 資料比較多，保留七天。  
 packetbeat 資料比較少，可以保留久一點，所以我就分兩個 action 來設定
 
 ```yml
@@ -91,7 +93,7 @@ actions:
 
 ### 執行
 
-接下來只需要執行下面指令就可以了～
+接下來只需要執行下面指令就可以了～  
 
 ```bash
 > curator action.yml
