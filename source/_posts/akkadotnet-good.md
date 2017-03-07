@@ -102,5 +102,4 @@ Akka.Cluster 與 Akka.Remote 不太一樣的是，多出了 High Availability �
 - [getakkanet](http://getakka.net)
 - [官方文件](http://getakka.net/docs/) - 必看！
 
----
 [AkkaDotNet]: http://getakka.net
