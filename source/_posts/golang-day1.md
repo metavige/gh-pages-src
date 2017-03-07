@@ -36,3 +36,15 @@ func main() {
 ```
 
 注意空行以及大括弧的位置，golang 很注意**程式碼格式**！
+
+## HelloWorld
+
+```golang
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World")
+}
+```
