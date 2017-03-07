@@ -4,7 +4,7 @@ categories:
 - 程式開發
 tags:
 - log4net
-- .net
+- dotnet
 ---
 
 我之前設定網站執行的 Action Log 的一個記錄，有些東西都是拼拼湊湊出來的，並不見得是最佳版本     

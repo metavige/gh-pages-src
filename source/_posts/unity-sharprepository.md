@@ -3,8 +3,8 @@ date: 2013-11-19 15:38:00
 categories:
 - 程式開發
 tags:
-- C#
-- .net
+- c#
+- dotnet
 - IoC
 ---
 

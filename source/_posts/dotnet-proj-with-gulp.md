@@ -1,7 +1,7 @@
 title: "在 .Net 專案使用 gulp build"
 date: 2015-12-12 09:58:06
 tags:
-- .net
+- dotnet
 - gulp
 - javascript
 categories:

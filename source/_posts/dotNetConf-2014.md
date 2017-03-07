@@ -3,7 +3,7 @@ date: 2014-07-12 10:00:00
 categories:
 - 程式開發
 tags:
-- .net
+- dotnet
 ---
 
 [dotNetConf 2014](http://blogs.msdn.com/b/dotnet/archive/2014/07/02/dotnetconf-2014-wrapup.aspx) 的影片已經可以在 Channel 9 找到了  
