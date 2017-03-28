@@ -94,12 +94,12 @@ sns:
 # SNS Share Switch
 sns_share:
     twitter: true
-    facebook: false
+    facebook: true
     github: true
-    googleplus: false
-    weibo: false
-    linkedin: false
-    qq: false
+    googleplus: true
+    weibo: true
+    linkedin: true
+    qq: true
     telegram: false
 
 # Sidebar Customize
@@ -146,7 +146,7 @@ topPost: false
 #     duoshuo | disqus | disqus_click
 comment:
     use: disqus
-    shortname: 
+    shortname: metavigegitpages
     # duoshuo_thread_key_type: path
     # duoshuo_embed_js_url: "https://static.duoshuo.com/embed.js"
 
