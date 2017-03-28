@@ -1,8 +1,8 @@
 title: ElasticSearch Curator
 date: 2016-11-18 13:34:30
 tags:
-- Docker
-- ElasticSearch
+- docker
+- elasticsearch
 ---
 
 [Curator](https://github.com/elastic/curator) 一個用來管理 ElasticSearch indices/snapshots 的工具
@@ -102,3 +102,5 @@ actions:
 ### Docker
 
 我把專案放在 Github 上面: [elasticsearch-curator](https://github.com/metavige/elasticsearch-curator)
+
+
