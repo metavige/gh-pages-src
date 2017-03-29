@@ -17,10 +17,10 @@ IMAGE_NAME=apt-cacher-ng
 PUSH_NAME=registry.co/nebula/${IMAGE_NAME}:v20170328
 
 build:
-	docker build -t ${IMAGE_NAME} .
+  docker build -t ${IMAGE_NAME} .
 
 push:
-	docker tag ${IMAGE_NAME} ${PUSH_NAME} && docker push ${PUSH_NAME} && docker rmi ${PUSH_NAME}
+  docker tag ${IMAGE_NAME} ${PUSH_NAME} && docker push ${PUSH_NAME} && docker rmi ${PUSH_NAME}
 ```
 
 老實說，我也不知道什麼才是對的，只是這樣我可以跑，好像就是對的勒  

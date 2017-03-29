@@ -1,4 +1,4 @@
-title: 開始用 Ansible 管理 Windows
+title: "用 Ansible 管理 Windows"
 date: 2016-01-19 22:14:24
 tags:
 - ansible

@@ -1,4 +1,4 @@
-title: ElasticSearch Curator
+title: "ElasticSearch Curator"
 date: 2016-11-18 13:34:30
 tags:
 - docker

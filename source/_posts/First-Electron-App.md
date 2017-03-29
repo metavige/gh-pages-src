@@ -1,4 +1,4 @@
-title: First Electron App
+title: "First Electron App"
 date: 2015-12-30 20:59:10
 tags:
 - electron
