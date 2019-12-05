@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '7'
+  - "lts"
 env:
   - CXX=g++-4.8
 addons:
@@ -10,19 +10,19 @@ addons:
     packages:
       - g++-4.8
 before_install:
-- openssl aes-256-cbc -K $encrypted_b48f58bb6465_key -iv $encrypted_b48f58bb6465_iv -in .travis/ssh_key.enc -out ~/.ssh/id_rsa -d
-- chmod 600 ~/.ssh/id_rsa
-- eval $(ssh-agent)
-- ssh-add ~/.ssh/id_rsa
-- cp .travis/ssh_config ~/.ssh/config
-- git config --global user.name "metavige"
-- git config --global user.email metavige@gmail.com
-- git config --global push.default simple
-- curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-- npm install hexo-cli -g 
-- git clone https://github.com/metavige/metavige.github.io.git .deploy_git
+  - openssl aes-256-cbc -K $encrypted_b48f58bb6465_key -iv $encrypted_b48f58bb6465_iv -in .travis/ssh_key.enc -out ~/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
+  - eval $(ssh-agent)
+  - ssh-add ~/.ssh/id_rsa
+  - cp .travis/ssh_config ~/.ssh/config
+  - git config --global user.name "metavige"
+  - git config --global user.email metavige@gmail.com
+  - git config --global push.default simple
+  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  - npm install hexo-cli -g
+  - git clone https://github.com/metavige/metavige.github.io.git .deploy_git
 script:
-- hexo g --deploy
+  - hexo g --deploy
 branches:
   only:
-  - master
+    - master
