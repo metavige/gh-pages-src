@@ -21,10 +21,11 @@ script:
 
 deploy:
   provider: pages
-	skip-cleanup: true
-	repo: metavige/metavige.github.io
+  skip-cleanup: true
   github-token: $GITHUB_TOKEN
-  local-dir: public
-  keep-history: false
+  repo: metavige/metavige.github.io
+  keep-history: true
+  verbose: true
   on:
     branch: master
+  local-dir: public
