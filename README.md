@@ -13,4 +13,5 @@ sources for git-pages
 
 ## 20191209
 
-嘗試移轉到 Github Actions
+- 嘗試移轉到 Github Actions
+- 將原先 sites 與 metavige.github.io 的 repo 合併起來
