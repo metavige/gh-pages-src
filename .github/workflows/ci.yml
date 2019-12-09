@@ -10,13 +10,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Generate Pages
-        run: npm install && npm run generate
-
-      - uses: seanmiddleditch/gha-publish-to-git@master
-        with:
-          repository: git@github.com:metavige/metavige.github.io.git
-          branch: gh-pages
-          github_token: "${{ secrets.ACCESS_TOKEN  }}"
-          source_folder: public
-        if: success() && github.event == 'push'
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: public
+          BUILD_SCRIPT: npm install && npm run generate
