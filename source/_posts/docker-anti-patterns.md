@@ -141,40 +141,40 @@ Docker 的部署規劃，應該要包含 registry 本身，可以用來充當資
 原文的範例，將 Dockerfile 當作 CI 使用：
 
 ```
-`# Run Sonar analysis`
-`FROM newtmitch/sonar-scanner AS sonar`
-`COPY src src`
-`RUN sonar-scanner
-`
-`# Build application`
-`FROM node:11 AS build`
-`WORKDIR /usr/src/app`
-`COPY . .`
-`RUN yarn install \`
-` yarn run lint \`
-` yarn run build \`
-` yarn run generate-docs`
-`LABEL stage=build`
-`
-# Run unit test`
-`FROM build AS unit-tests`
-`RUN yarn run unit-tests`
-`LABEL stage=unit-tests
-`
-`# Push docs to S3``
-FROM containerlabs/aws-sdk AS push-docs`
-`ARG push-docs=false`
-`COPY --from=build docs docs`
-`RUN [[ "$push-docs" == true ]] &amp;&amp; aws s3 cp -r docs s3://my-docs-bucket/`
-`
-# Build final app`
-`FROM node:11-slim`
-`EXPOSE 8080`
-`WORKDIR /usr/src/app`
-`COPY --from=build /usr/src/app/node_modules node_modules`
-`COPY --from=build /usr/src/app/dist dist`
-`USER node`
-`CMD ["node", "./dist/server/index.js"]`
+# Run Sonar analysis
+FROM newtmitch/sonar-scanner AS sonar
+COPY src src
+RUN sonar-scanner
+
+# Build application
+FROM node:11 AS build
+WORKDIR /usr/src/app
+COPY . .
+RUN yarn install \
+ yarn run lint \
+ yarn run build \
+ yarn run generate-docs
+LABEL stage=build
+
+# Run unit test
+FROM build AS unit-tests
+RUN yarn run unit-tests
+LABEL stage=unit-tests
+
+# Push docs to S3
+FROM containerlabs/aws-sdk AS push-docs
+ARG push-docs=false
+COPY --from=build docs docs
+RUN [[ "$push-docs" == true ]] &amp;&amp; aws s3 cp -r docs s3://my-docs-bucket/
+
+# Build final app
+FROM node:11-slim
+EXPOSE 8080
+WORKDIR /usr/src/app
+COPY --from=build /usr/src/app/node_modules node_modules
+COPY --from=build /usr/src/app/dist dist
+USER node
+CMD ["node", "./dist/server/index.js"]
 ```
 
 這個範例有結合到前面的幾個反模式：
