@@ -2,7 +2,7 @@ name: GitHub Actions Build and Deploy
 on:
   push:
     branches:
-      - master
+      - pages-src
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -14,6 +14,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@master
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+          BASE_BRANCH: pages-src
+          BRANCH: master
           FOLDER: public
           BUILD_SCRIPT: npm install && npm run generate
