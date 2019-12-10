@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>有人用的架構，才是好架構 | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  <meta name="description" content="做架構設計幾年了，發現這幾年來，做最多的不是去研究學習怎樣做，而是去說服人家用這個架構。其實，有時候很討厭聽到下面這句話：  
+
+為什麼我們要這樣做？">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="有人用的架構，才是好架構"/>
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-07-07T02:56:00.000Z"><a href="/2011/07/07/architecture-think-2/">2011-07-07</a></time>
+      
+      
+  
+    <h1 class="title">有人用的架構，才是好架構</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>做架構設計幾年了，發現這幾年來，做最多的不是去研究學習怎樣做，而是去說服人家用這個架構。其實，有時候很討厭聽到下面這句話：  </p>
+<blockquote>
+<p>為什麼我們要這樣做？</p>
+</blockquote>
+<a id="more"></a>
+
+<p>說真的，這個問題我聽了很多次，通常會發生在以下幾種狀況的時候  </p>
+<ul>
+<li>老闆說要做架構設計：<br>有些主管，因為時程趕或者是因為什麼不知名的原因，認為有架構就是好事，所以希望能夠在自己的專案或系統中導入架構，除了或許會有莫名的虛榮心以外，當然真的相信架構設計能帶來一些好處的也不在少數。但是通常上行不下效～  </li>
+<li>自己一頭熱：<br>做設計的人，往往有時候看到一些技術文章，或者是使用一些 open source 的時候，發現別人這樣用相當好，所以自己一頭熱的想使用它，沒有詳細的去瞭解它的來龍去脈，以及當時這樣用的前因後果，這種狀況在初學者身上尤其明顯，我當年就常常這樣</li>
+<li>有人系統做爛了，需要收尾：
+救火隊的工程師，大概最有感覺，因為前人種的樹根基不穩，或者是遇到<a href="http://en.wikipedia.org/wiki/Code_smell" target="_blank" rel="noopener">臭氣燻天</a>的程式碼，發現原本的寫作方式已經無法在下去了，期望用新的方式來達到目的，順便重新整理一下程式碼  </li>
+<li>時程來不及：<br>往往專案趕、人力少的時候，希望用一些方式來達到專案時程。架構設計有時候也會是其中的一個選項，因為好的架構其實是可以專注的在 Business Logic 上面，而不是不斷的重複 Copy-Paste <del>~</del><br>遇到這種問題的時候，如果不是說別人是因為虛心求教來問的問題，我自己心裡面，常常都會有一個字先冒出來：『靠』，心情不好的時候就是另外一個 f word～  </li>
+</ul>
+<p>所以往往做架構設計這種事情，花最多時間的不是在設計，而是在說服別人要去用。包含為什麼要這樣用，以及要怎樣去用它</p>
+<p>可惜常常事不盡人意，我遇過做架構還會把系統搞爛的可能性，也有七八成～  </p>
+<ol>
+<li>你不夠力或者主事者不夠力的時候  </li>
+<li>你沒辦法後續繼續主導的時候  </li>
+<li>大家只想把一套設計用到爛的時候  </li>
+<li>你人緣不好的時候  </li>
+<li>你的想法，沒辦法落實的時候  </li>
+</ol>
+<p>在《<a href="http://zh.wikipedia.org/wiki/%E4%BA%BA%E6%9C%88%E7%A5%9E%E8%A9%B1" target="_blank" rel="noopener">人月神話</a>》這本書有一句蠻經典的話就是：『<a href="http://zh.wikipedia.org/wiki/%E6%B2%A1%E6%9C%89%E9%93%B6%E5%BC%B9" target="_blank" rel="noopener">沒有銀彈</a>』，所有的架構設計，都會因為時間、人員能力、專案狀況而因地制宜，不可能用一套打死所有的狀況。就像是 <a href="http://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="noopener">GoF 設計模式</a> 中的 <a href="http://zh.wikipedia.org/wiki/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">工廠模式</a>，往往根據不同的狀況，會有不同的實作方式，如採用 Reflection, IoC 等都是很好的實作，而<a href="http://zh.wikipedia.org/wiki/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">工廠模式</a>並不會告訴你，你應該要怎樣去實作，而是告訴你，你可能的概念方向是什麼。  </p>
+<p>做到後期，往往發現做架構其實就是在做人，你有好的思考能力、設計能力，但是如果你不能說服人家心甘情願的來使用，那就跟 0 元的股票是一樣的，擦屁股都嫌硬～  </p>
+<p>願不願意使用絕對是重點。如果飽了，或者是食慾不振的時候，不管多美味的食物，都不太能挑起食慾。同理，架構設計用或不用，絕對是初期一定要討論的關鍵點，有人願意用，並且會照著你的方式用，這個架構才是有用的牛刀<br>如果你不是主導者，或者你沒有有力的主導者幫你忙，不做有時候比硬要做來的好。你要知道，生命會自己找到出路的～～～沒有你，生活一樣悲慘要過  </p>
+<p>你做出來的架構，後續要交給其他人去使用，但是你無法抽出時間或你無法參與調整的時候，往往到最後，你會發現人的創意是無限的，事情往往都會超出你的意料之外   </p>
+<p>通常，會想要用架構設計的人少之又少，如果能夠不學新東西就可以把事情做完，這樣的人不在少數，所以，學一套作法，已經會讓很多人為之卻步了，所以如果能夠用一套作法打死所有的系統，那是最好。這種架構，你最好不要署名，不然你會發現，越到後期，你背後的怨氣會越來越重，因為架構已經是一輛重的拖不動的牛車了  </p>
+<p>不要沒學會爬就想要飛，市面上能找到架構設計的書百百種，但是不會有人告訴你你的專案或系統應該要用哪種架構，但是不要天真的以為把很知名的設計模式用上去就對了，如果你不是很有經驗或者是你真的理解了那些設計模式背後的意義，你還是乖乖用 Copy-Paste 好了，畢竟做對才是最重要的  </p>
+<p>對專案參與者的個性跟能力要熟悉。如果你不知道你的同事，到底是不是能接受這樣的作法，那真的你要花費相當多的精神去瞭解以及預防萬一，避免後期會發生你沒辦法收尾的狀況  </p>
+<p>做人真的比做架構重要。你如果是個討人厭的傢伙，不管你的能力再好，架構再漂亮，都不會有人願意去用的～  </p>
+<p>最近因為換了新東家，對公司生態人員都還不甚熟悉，在默契還不足的情況下，常常會發生我要花比較長的時間去說服別人使用一些他們以前沒用過的東西，所以最近的感觸特別多～</p>
+<p>找了找最近的文章，發現去年才發過類似的文章：<a href="/2010/09/20/architecture-think-1/">愈來愈不喜歡講架構了，因為講的人痛苦，聽的人也痛苦</a>，我想我現在的心情，大概有經過沈澱，已經慢慢的可以收斂了  </p>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/思考/">思考</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/architecture/">architecture</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+
+	
+	  <a data-flip-widget="flipit" href="https://flipboard.com" target="_blank" rel="noopener">Add to Flipboard Magazine.</a><script src="https://cdn.flipboard.com/web/buttons/js/flbuttons.min.js" type="text/javascript"></script>
+	
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+	
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C#</a><small>1</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c#</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

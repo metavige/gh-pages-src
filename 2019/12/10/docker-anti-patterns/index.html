@@ -1,0 +1,382 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Docker 的反模式 | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  <meta name="description" content="Docker 的反模式針對網路上面的文章，加上自己的解釋，說明如何避免做到 Docker 的反模式
+原始文章: Docker Anti-Pattern
+反模式 1: 將 Docker 視為虛擬機器 (VM)Docker 的生命週期，是隨著應用程式的啟動與停止，所以，每個啟動的容器 (Containe">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Docker 的反模式"/>
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-12-10T19:00:00.000Z"><a href="/2019/12/10/docker-anti-patterns/">2019-12-10</a></time>
+      
+      
+  
+    <h1 class="title">Docker 的反模式</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="Docker-的反模式"><a href="#Docker-的反模式" class="headerlink" title="Docker 的反模式"></a>Docker 的反模式</h1><p>針對網路上面的文章，加上自己的解釋，說明如何避免做到 Docker 的反模式</p>
+<p>原始文章: <a href="https://medium.com/containers-101/docker-anti-patterns-ad2a1fcd5ce1" target="_blank" rel="noopener">Docker Anti-Pattern</a></p>
+<h2 id="反模式-1-將-Docker-視為虛擬機器-VM"><a href="#反模式-1-將-Docker-視為虛擬機器-VM" class="headerlink" title="反模式 1: 將 Docker 視為虛擬機器 (VM)"></a>反模式 1: 將 Docker 視為虛擬機器 (VM)</h2><p>Docker 的生命週期，是隨著應用程式的啟動與停止，所以，每個啟動的容器 (Container) 都有可能因爲應用程式發生狀況而停止。而 Docker 本身的機制，會將容器重新以 Image 的原始狀態再重新啟動。</p>
+<p>與虛擬機器不同，容器本身並不需要長期，不間斷的執行。容器本身的特性就是會中斷、啟動快速、唯讀 Image 。所以在設計上，需要思考的並不是如何長期的讓容器不間斷地執行，而是思考如何透過 Docker 本身的機制，搭配 DevOps 的流程與適合的 Orchestrator，來讓服務可以不中斷。</p>
+<p>而如果有思考到，如何在容器服務啟動的過程中，手動變更應用程式內容 (或設定) 的方式，都需要重新思考是否要搭配適當的 CI/CD 流程，對現有 Image 的修改。</p>
+<p>這種反模式沒有解決方式，只有變更自己的思考方式，重新調整對 Docker 的做法</p>
+<h2 id="反模式-2-建立不透明的-Docker-Image"><a href="#反模式-2-建立不透明的-Docker-Image" class="headerlink" title="反模式 2: 建立不透明的 Docker Image"></a>反模式 2: 建立不透明的 Docker Image</h2><p>通常建立 Docker Image 會思考：</p>
+<ul>
+<li>任何開發者，將 Dockerfile 與其資源 (包含原始碼) 下載後，在任何地方都可以建立出一致的 Image</li>
+<li>所有的依賴性，包含開發程式所需的依賴項目，都有統一的取用或存取方式 (包含公司內部的 Repository 使用)</li>
+<li>不使用外部依賴的工具，來建置 Image ，避免離開了建置環境，因為工具的依賴性，導致無法建置出相同的 Image</li>
+<li>明確定義所使用的軟體版本 (包含套件依賴)</li>
+<li>透過修改 Dockerfile 就可以做到修改應用程式的版本</li>
+<li>未產出最終的 Image 版本，無法移轉到生產環境執行</li>
+</ul>
+<p>如果撰寫 Dockerfile 的時候，無法在另外一個環境重現，表示設計上需要重新調整</p>
+<p>解決方式是仔細了解應用程式建置的步驟，並且仔細的了解 Dockerfile 建置時所發生的狀況，才能設計出更好的 Image 建置步驟。</p>
+<blockquote>
+<p>所以在建置 Docker 的時候，也是對自己開發的程式語言一種重新理解的方式</p>
+</blockquote>
+<h2 id="反模式-3-建立有副作用-Side-Effect-的-Dockerfile"><a href="#反模式-3-建立有副作用-Side-Effect-的-Dockerfile" class="headerlink" title="反模式 3: 建立有副作用 (Side-Effect) 的 Dockerfile"></a>反模式 3: 建立有副作用 (Side-Effect) 的 Dockerfile</h2><p>因為上述的特性，Dockerfile 應該任何人下載都可以建立出相同的 Image ，所以不管幾次的建立，應該最終產出的 Image 都要是一致的，不管是否是在開發者的環境建置，或者是透過 CI 的服務器來建置。</p>
+<p>但是如果建置階段，在 Dockerfile 中有以下的步驟：</p>
+<ul>
+<li>執行 git commit 或其他 git 操作</li>
+<li>清除或修改資料庫資料</li>
+<li>呼叫其他外部服務</li>
+</ul>
+<p>這樣表示每次建置的步驟，都會有其副作用產生，而且不同次的建置，可能會造成不同的後果。</p>
+<p>不要把 Dockerfile 當作 CI 的步驟，或者是當作無限功能的 Bash 腳本集合。</p>
+<p>解決方案是簡化 Dockerfile，僅包含下列的可能步驟：</p>
+<ul>
+<li>複製原始碼</li>
+<li>下載依賴項目</li>
+<li>編譯/打包應用程式</li>
+<li>處理/縮小/轉換 Local 資源</li>
+<li>在 Docker 環境中執行 shell 文件或編輯文件</li>
+</ul>
+<p>因為 Dockerfile 本身有 Cache 機制，如果每個圖層之間並沒有檔案的變化，就可以從 Cache 重新使用，但如果其中的ㄧ個步驟有副作用，會破壞 Cache 機制的執行，導致每次建置都會重新產生新的圖層。</p>
+<h2 id="反模式-4-混淆用於部署以及用於開發的-Image"><a href="#反模式-4-混淆用於部署以及用於開發的-Image" class="headerlink" title="反模式 4: 混淆用於部署以及用於開發的 Image"></a>反模式 4: 混淆用於部署以及用於開發的 Image</h2><p>通常在建置 Image 的時候，會有兩種 Image 的角色：部署用的 Image 跟開發用的 Image (或者是 CI/CD 用的 Image )</p>
+<p>部署 Image 通常具有下面的特性</p>
+<ul>
+<li>最小化/編譯過後的應用程式代碼以及 Runtime 的依賴項目</li>
+<li>沒有了!</li>
+</ul>
+<p>第二類是開發用的 Image 或是 CI/CD 用的 Image</p>
+<ul>
+<li>原始碼 (沒有處理過的)</li>
+<li>編譯器/壓縮器</li>
+<li>測試框架/工具</li>
+<li>安全掃描/代碼質量掃描/程式碼靜態分析工具</li>
+<li>Cloud 集成工具</li>
+<li>CI/CD Pipeline 所需要的實用工具</li>
+</ul>
+<p>通常部署到生產環境的 Image ，應該要最小化、安全且經過嚴格處理。在 CI/CD 步驟所產生的任何 Image 通常不會部署到其他地方，所以他的要求 (大小或安全性) 就會小一點。</p>
+<p>舉例來說，部署 Image 裡面沒有理由要包含 git 或者是 vim 工具。</p>
+<p>不過這邊，請不要思考本地端開發以及生產環境的部署要結合在一起，目前還是很有難度的。</p>
+<p>總結，請嘗試了解每種 Image 所扮演的角色。一種 Image 應該只扮演一種角色。如果在部署 Image 中包含了測試的工具或套件，就表示這部分是有做錯誤的。可以嘗試使用 Docker 的多階段建置 (Multi-Stage Build)</p>
+<h2 id="反模式-5-不同環境-QA-Staging-Production-建置不同的-Image"><a href="#反模式-5-不同環境-QA-Staging-Production-建置不同的-Image" class="headerlink" title="反模式 5: 不同環境 (QA, Staging, Production) 建置不同的 Image"></a>反模式 5: 不同環境 (QA, Staging, Production) 建置不同的 Image</h2><p>使用容器的其中一個優點是他的不可變特性，這表示 Docker Image 在任何地方執行都應該有相同的結果。所以 Docker Image 應該只有建立一次，然後在散佈到不同的各種環境，直到最後的生產環境。</p>
+<p>因為這樣，才可以保證在測試環境中的內容與另外一個環境的內容完全一致。如果針對不同的環境建置不同的 Image ，無法保證其行為是否一致，這樣或許表示會需要導入更多的測試，或者是需要導入額外的 debug 工具，這樣反而會讓不同環境間的差異更難處理。</p>
+<p>但是，不同環境有不同的設定 (像是 Secret 或環境變數)，這是完全正常的，但是請保證其他所有內容都應該完全一樣。</p>
+<h2 id="反模式-6-在生產服務器上直接產生-Docker-Image"><a href="#反模式-6-在生產服務器上直接產生-Docker-Image" class="headerlink" title="反模式 6: 在生產服務器上直接產生 Docker Image"></a>反模式 6: 在生產服務器上直接產生 Docker Image</h2><p>Docker registry 是用來存放所建立好的應用程式 Image 的一個目錄服務，可以讓任何環境都可以很容易的重新取得或部署應用服務的 Image ，也是一個中心的服務，用來保存應用服務 Image 的歷史版本。</p>
+<p>通常公司會思考使用兩組 registry，一個對應開發環境，一個對應生產環境。一個 docker image 應該建置完後就被放置到開發的 registry，經過整合測試、安全掃描、以及其他的質量檢查等工作，確認之後就可以升級到正式的 registry 去，並發行到生產環境執行。</p>
+<p>Docker 的部署規劃，應該要包含 registry 本身，可以用來充當資產儲存庫也當作中間的儲存庫。</p>
+<p>如果做法是在生產環境透過 git 直接抓下原始碼來建置，這部分會造成許多問題</p>
+<ul>
+<li>生產環境的機器應該不能訪問 git repository</li>
+<li>Git 應該是開發人員使用的工具，不應該是營運環境所需要使用的工具</li>
+<li>在生產環境上執行的 image 是沒有辦法管理的，你不會知道上面跑了什麼 image</li>
+<li>git repository 會需要外部的訪問權限，如果公司內部對原始碼有安全性管理的話</li>
+</ul>
+<p>這種直接抓下原始碼建置的動作，可能在剛開始建置環境的時候行得通，但如果面臨到較大量的安裝，就會有瓶頸。 docker registry 是有他的優勢，而且現在的工具都還有其他的安全性功能 (像是弱點掃描等)，而且現在 docker registry 也都有相關的 API 可以操作。</p>
+<p>而且，透過 docker registry ，原始碼也可以安全地在公司防火牆內保存。</p>
+<h2 id="反模式-7-使用-git-hash-代替-docker-image"><a href="#反模式-7-使用-git-hash-代替-docker-image" class="headerlink" title="反模式 7: 使用 git hash 代替 docker image"></a>反模式 7: 使用 git hash 代替 docker image</h2><blockquote>
+<p>這邊的 git hash 指的是每次 git 的 commit，因為每次 commit.都會產生一組唯一的 hash，用來表示每次的程式碼發佈版本</p>
+</blockquote>
+<p>參考上面的兩個反模式推論，代表如果使用了 docker，docker registry 應該是唯一用來發行最終產出的最後結果。開發人員以及維運人員，應該使用容器來當作共通的語言，互相之間移交的項目也應該會是容器，而不是 git 的某個 commit。</p>
+<p>較早以前的產品發行，可能會是以一個版本管理的 commit 為一個發行階段，透過 CI/CD 的建置，產出最終的成品 (artifact)，但是如果要重新發行到不同環境，可能會以相同的 commit 為主，重新建置發行一套相同的應用程式，這樣也容易浪費建置資源。</p>
+<p>如果採用了 docker image 為最終發行的成品，表示維運人員並不需要知道 git repo 發生了什麼事情，他們只需要知道 docker image 是否已經準備好了，可以部署到生產環境去，因為是使用相同的 image，所以不需要重新建置。</p>
+<p>維運人員也可以不需要了解測試工具或建置程式的系統等，一般維運的日常操作並不需要。</p>
+<h2 id="反模式-8-硬編碼-secret-以及設定在-docker-image-中"><a href="#反模式-8-硬編碼-secret-以及設定在-docker-image-中" class="headerlink" title="反模式 8: 硬編碼 secret 以及設定在 docker image 中"></a>反模式 8: 硬編碼 secret 以及設定在 docker image 中</h2><p>此模式與反模式 5 相關。通常如果不同環境需要不同的 image，代表裡面包含了不同環境的設定或一些安全金鑰等資訊。</p>
+<p>這樣表示，你需要在建置的過程當中管裡所有環境的設定以及安全金鑰等資訊，這會讓整個建置 (CI/CD) 步驟變得複雜。思考<a href="https://12factor.net/config" target="_blank" rel="noopener">12 因子的建置</a>部分說明。</p>
+<p>應用程式應該是在執行階段才獲取到設定，而不是在建置的時候。這有很多種做法可以做到，像是環境變數，或者是搭配其他的服務 (k8s configmap, etcd, zookeeper, consul 等) 以及 secret 的機制 (k8s secret, confidart, cerberus, valutrepo 等)</p>
+<h2 id="反模式-9-Dockerfile-內做的事情太多"><a href="#反模式-9-Dockerfile-內做的事情太多" class="headerlink" title="反模式 9: Dockerfile 內做的事情太多"></a>反模式 9: Dockerfile 內做的事情太多</h2><p>原文的範例，將 Dockerfile 當作 CI 使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># Run Sonar analysis</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">FROM newtmitch&#x2F;sonar-scanner AS sonar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">COPY src src</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">RUN sonar-scanner</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"># Build application</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">FROM node:11 AS build</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">WORKDIR &#x2F;usr&#x2F;src&#x2F;app</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">COPY . .</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">RUN yarn install \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"> yarn run lint \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"> yarn run build \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"> yarn run generate-docs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">LABEL stage&#x3D;build</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"># Run unit test</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">FROM build AS unit-tests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">RUN yarn run unit-tests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">LABEL stage&#x3D;unit-tests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"># Push docs to S3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">FROM containerlabs&#x2F;aws-sdk AS push-docs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">ARG push-docs&#x3D;false</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">COPY --from&#x3D;build docs docs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">RUN [[ &quot;$push-docs&quot; &#x3D;&#x3D; true ]] &amp;&amp; aws s3 cp -r docs s3:&#x2F;&#x2F;my-docs-bucket&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"># Build final app</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">FROM node:11-slim</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">EXPOSE 8080</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">WORKDIR &#x2F;usr&#x2F;src&#x2F;app</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">COPY --from&#x3D;build &#x2F;usr&#x2F;src&#x2F;app&#x2F;node_modules node_modules</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">COPY --from&#x3D;build &#x2F;usr&#x2F;src&#x2F;app&#x2F;dist dist</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">USER node</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">CMD [&quot;node&quot;, &quot;.&#x2F;dist&#x2F;server&#x2F;index.js&quot;]</span></pre></td></tr></table></figure>
+
+<p>這個範例有結合到前面的幾個反模式：</p>
+<ul>
+<li>假定 Sonar 服務存在 (模式 2)</li>
+<li>可能會推送資料到 S3 (模式 3)，具有潛在的副作用</li>
+<li>可以做為佈署 image ，也可以作為開發 image (模式 4)</li>
+</ul>
+<p>Dockerfile 與 CI 的技術是不同的領域，基本上現在的 CI 功能已經可以做到很好，不需要將要在 CI 管道中執行的指令與在 Docker 容器中執行的指令混淆。</p>
+<p>修改此 Dockerfile 的方法是把它拆成不同的 Dockerfile，並在 CI 階段用不同的步驟分開執行，讓每個 Dockerfile 都有自己的單一目標。</p>
+<h2 id="反模式-10-Dockerfile-內做的事情太少"><a href="#反模式-10-Dockerfile-內做的事情太少" class="headerlink" title="反模式 10: Dockerfile 內做的事情太少"></a>反模式 10: Dockerfile 內做的事情太少</h2><p>容器在建置時，會包含處理應用程式的程式庫依賴關係，這也很適合用來隔離每個應用程式之間的程式庫以及框架版本。因為傳統開發人員會在自己的開發環境安裝不同版本的工具，所以常常導致開發環境的混亂。但是 Dockerfile 可以用來準確的描述應用程式所需要的內容 (但是這需要開發人員確實的使用這樣的作法，這種關係才會成立)。</p>
+<p>所以對維運人員來講，可以不需要安裝不同的開發工具，像是 Java、.NET、Python 等，只需要下載不同的 docker image 即可。</p>
+<p>早期有一種建置 docker image 的方式，是將相依的程式庫在建置過程當中從本地端複製進去：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">FROM openjdk:8-jdk-alpine</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">VOLUME &#x2F;tmp</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ARG JAR_FILE</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">COPY $&#123;JAR_FILE&#125; app.jar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd&#x3D;file:&#x2F;dev&#x2F;.&#x2F;urandom&quot;，&quot;-jar&quot;,&quot;&#x2F;app.jar&quot;]</span></pre></td></tr></table></figure>
+
+<p>在這份 Dockerfile 中並沒有說明 app.jar 是怎麼產生的，也沒有說明來源，所以實際建置的時候，是無法得知，這會造成建置的困難，如果還有不同語言，會更麻煩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">FROM openjdk:8-jdk-alpine</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">COPY pom.xml &#x2F;tmp&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">COPY src &#x2F;tmp&#x2F;src&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">WORKDIR &#x2F;tmp&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">RUN .&#x2F;gradlew build</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">COPY &#x2F;tmp&#x2F;build&#x2F;app.war &#x2F;app.jar</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd &#x3D; file:&#x2F;dev&#x2F;.&#x2F;urandom&quot;,&quot;-jar&quot;,&quot;&#x2F;app.jar&quot;]</span></pre></td></tr></table></figure>
+
+<p>上面的 Dockerfile 就明確的說明了建置步驟，並且，建置時，不需要安裝 Java 環境。但是還是有改善的空間 (Multi-Stage Build)</p>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/程式開發/">程式開發</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/docker/">docker</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+
+	
+	  <a data-flip-widget="flipit" href="https://flipboard.com" target="_blank" rel="noopener">Add to Flipboard Magazine.</a><script src="https://cdn.flipboard.com/web/buttons/js/flbuttons.min.js" type="text/javascript"></script>
+	
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+	
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C#</a><small>1</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c#</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

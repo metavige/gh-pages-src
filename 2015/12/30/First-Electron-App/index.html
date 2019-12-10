@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>First Electron App | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  <meta name="description" content="很早就想要用 Electron 來開發 App 了，因為 Web 其實用起來有時候卡卡的尤其 Electron 出現之後，開發 Web 等同於開發 App，真是令人感到興奮～">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="First Electron App"/>
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-30T20:59:10.000Z"><a href="/2015/12/30/First-Electron-App/">2015-12-30</a></time>
+      
+      
+  
+    <h1 class="title">First Electron App</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>很早就想要用 <a href="http://electron.atom.io" target="_blank" rel="noopener">Electron</a> 來開發 App 了，因為 Web 其實用起來有時候卡卡的<br>尤其 <a href="http://electron.atom.io" target="_blank" rel="noopener">Electron</a> 出現之後，開發 Web 等同於開發 App，真是令人感到興奮～  </p>
+<a id="more"></a>
+
+<h2 id="開始"><a href="#開始" class="headerlink" title="開始"></a>開始</h2><ul>
+<li><p>建立一個目錄</p>
+</li>
+<li><p>用 <code>npm init</code> 建立 package.json</p>
+</li>
+<li><p>安裝 <code>electron-prebuilt</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">npm install --save-dev electron-prebuilt</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="程式內容"><a href="#程式內容" class="headerlink" title="程式內容"></a>程式內容</h2><p>簡單的 Hello World!   </p>
+<ul>
+<li><p>先建立 app 目錄</p>
+</li>
+<li><p>產生 <code>app/index.html</code> 檔案，內容很簡單！就是 Hello!  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;Hello&lt;&#x2F;h2&gt;</span></pre></td></tr></table></figure></li>
+<li><p>建立 <code>main.js</code>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#39;use strict&#39;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">var app &#x3D; require(&#39;app&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">var BrowserWindow &#x3D; require(&#39;browser-window&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">var mainWindow &#x3D; null;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">app.on(&#39;ready&#39;, function() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    mainWindow &#x3D; new BrowserWindow(&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        height: 600,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        width: 800</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    mainWindow.loadURL(&#39;file:&#x2F;&#x2F;&#39; + __dirname + &#39;&#x2F;app&#x2F;index.html&#39;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#125;);</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h2><p>因為剛剛安裝了 <code>electron-prebuilt</code>，所以可以直接用下面的指令就可以執行了！  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">node_modules&#x2F;.bin&#x2F;electron .</span></pre></td></tr></table></figure>
+
+<p>這樣就可以了～  </p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>參考 <a href="https://www.npmjs.com/package/electron-packager" target="_blank" rel="noopener">electron-packager</a>  </p>
+<ul>
+<li><p>先安裝 <code>electron-packager</code></p>
+</li>
+<li><p>參考說明文件，用下面的指令來打包自己的 App。（注意那個版本只的是 Electron 版本，不是你自己 App 的版本）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ electron-packager .&#x2F; App1 --platform&#x3D;darwin --arch&#x3D;x64 --out ~&#x2F;Desktop&#x2F;App1 --version 0.36.2 --overwrite</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Packaging app for platform darwin x64 using electron v0.36.2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Wrote new app to &#x2F;Users&#x2F;RickyChiang&#x2F;Desktop&#x2F;App1&#x2F;App1-darwin-x64</span></pre></td></tr></table></figure>
+
+<p>目前 Electron Release 的版本是 0.36.2，可以到 <a href="https://github.com/atom/electron/releases" target="_blank" rel="noopener">https://github.com/atom/electron/releases</a> 去看  </p>
+</li>
+<li><p><code>electron-packager</code> 命令列的說明可以參考 <a href="https://github.com/maxogden/electron-packager/blob/master/usage.txt" target="_blank" rel="noopener">usage.txt</a></p>
+</li>
+<li><p>到桌面看就會有檔案產生了，點兩下就可以執行了  </p>
+<img src="/2015/12/30/First-Electron-App/desktop-app1.png" class="" title="[Desktop]"> 
+
+
+</li>
+</ul>
+<h2 id="後語"><a href="#後語" class="headerlink" title="後語"></a>後語</h2><p>如果要方便執行的話，可以編輯一下 <code>package.json</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"name"</span>: <span class="string">"app1"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"description"</span>: <span class="string">""</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"main"</span>: <span class="string">"./main.js"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"scripts"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"start"</span>: <span class="string">"electron ."</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"package"</span>: <span class="string">"electron-packager ./ App1 --platform=darwin --arch=x64 --out ~/Desktop/App1 --version 0.36.2 --overwrite"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"devDependencies"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"electron-packager"</span>: <span class="string">"^5.2.0"</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"electron-prebuilt"</span>: <span class="string">"^0.36.2"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>這樣就可以用 <code>npm start</code> 執行了～<br>編譯的話，就用 <code>npm run package</code> 就可以了</p>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/electron/">electron</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+
+	
+	  <a data-flip-widget="flipit" href="https://flipboard.com" target="_blank" rel="noopener">Add to Flipboard Magazine.</a><script src="https://cdn.flipboard.com/web/buttons/js/flbuttons.min.js" type="text/javascript"></script>
+	
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+	
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/C/">C#</a><small>1</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/c/">c#</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/C/" style="font-size: 10px;">C#</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
