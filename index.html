@@ -1,0 +1,425 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>@metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-12-10T19:00:00.000Z"><a href="/2019/12/10/docker-anti-patterns/">2019-12-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/12/10/docker-anti-patterns/">Docker 的反模式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>針對網路上面的文章，加上自己的解釋，說明如何避免做到 Docker 的反模式</p>
+<p>原始文章: <a href="https://medium.com/containers-101/docker-anti-patterns-ad2a1fcd5ce1" target="_blank" rel="noopener">Docker Anti-Pattern</a></p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2019/12/10/docker-anti-patterns/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-08-31T21:09:47.000Z"><a href="/2017/08/31/dotnet-standard-note/">2017-08-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/08/31/dotnet-standard-note/">.Net Standard 筆記</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="簡單筆記"><a href="#簡單筆記" class="headerlink" title="簡單筆記"></a>簡單筆記</h2><ul>
+<li>標準的基礎程式庫 API 介面定義</li>
+<li>可以跨平台</li>
+<li>目前 .Net framework 4.6.1 支援 .Net Standard 2.0 (.Net Standard 1.x 僅有 .Net Code 1.x 支援)</li>
+<li>.Net Standard 版本控制規則<ul>
+<li>累加：較新的版本會包含較舊版本的 API</li>
+<li>不可變：版本提交後，該版本便已凍結</li>
+</ul>
+</li>
+<li>自行根據 PCL (Portable Class Library)，決定設定檔集合 (就是決定要用哪套實作的程式庫，看是要用 .Net framework 或是 .Net Core)</li>
+</ul>
+<h2 id="架構圖"><a href="#架構圖" class="headerlink" title="架構圖"></a>架構圖</h2><p><img src="https://docs.microsoft.com/zh-tw/dotnet/standard/media/components.png" alt=""></p>
+<h2 id="網路介紹文章"><a href="#網路介紹文章" class="headerlink" title="網路介紹文章"></a>網路介紹文章</h2><ul>
+<li><a href="http://blog.darkthread.net/post-2016-09-27-net-standard-2-0.aspx" target="_blank" rel="noopener">2016.09.27 .NET Standard 2.0 是什麼？可以吃嗎？ (黑暗執行緒)</a></li>
+<li><a href="https://dotblogs.com.tw/aspnetshare/2016/04/10/20160409-netcore-netstandard" target="_blank" rel="noopener">2016.04.10 ASP.NET Core 與 .Net Core, .Net Platform Standard, 以及 Shared Runtime 之間的關係 (微軟開發工具的資訊分享)</a></li>
+<li><a href="http://bruceyclee.tw/2017/02/25/netstandard/" target="_blank" rel="noopener">2017.02.25 再來多聊一點 .Net Standard (大毛電腦科學筆記)</a></li>
+<li><a href="https://dotblogs.com.tw/gelis/2017/08/20/143437" target="_blank" rel="noopener">2017-08-20 .NET Standard 2.0 與 .NET 的未來與發展 (gelis 技術隨筆)</a></li>
+</ul>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-03-28T21:34:06.000Z"><a href="/2017/03/28/makefile-for-dockerbuild/">2017-03-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/03/28/makefile-for-dockerbuild/">Makefile for Docker Build</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>其實我對 Makefile 算是一知半解，趁此機會學習一下    </p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2017/03/28/makefile-for-dockerbuild/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-03-09T21:55:40.000Z"><a href="/2017/03/09/golang-day3/">2017-03-09</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/03/09/golang-day3/">Golang Day 3</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>學習其實很無聊～沒有特別要做什麼的話，看著看著就想睡了～
+所以後來決定，之後就把程式碼做好放到 <a href="https://github.com/metavige/golang.learn" target="_blank" rel="noopener">github</a> 去好了<br>一次想一個想要做的小功能，這樣或許比較有趣  </p>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-03-08T00:00:00.000Z"><a href="/2017/03/08/golang-day2/">2017-03-08</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/03/08/golang-day2/">Golang Day 2</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="Golang-語法注意"><a href="#Golang-語法注意" class="headerlink" title="Golang 語法注意"></a>Golang 語法注意</h2><ul>
+<li>格式很重要，不管是空行或者是 TAB、大括號等位置，很重要，會編譯不過。不過可以用 gofmt 工具幫你自動排版程式。</li>
+<li>所有的程式需要用 package 整理，有點像是 java package/module 的觀念</li>
+<li>主程式一定是 <code>package main</code>, 而且一定會呼叫 <code>func main()</code>  </li>
+<li>引用不必要的 packages 會錯誤</li>
+<li>沒用到的變數也會錯誤</li>
+<li>不需要分號結尾</li>
+<li>條件式不需要用 () 包起來 (這我就有點不習慣了～因為 Java, javascript, C# 都要)</li>
+<li>golang 應該不算是 OOP, 所以要習慣沒有類別 (Class) 封裝這件事情</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://wizardforcel.gitbooks.io" target="_blank" rel="noopener">GO 聖經 - gitbook</a></li>
+</ul>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/page/2/" class="alignright next">下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+  
+<script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.5.3.js'><\/script>".replace("HOST", location.hostname));
+//]]></script></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>2</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/CSharp/" style="font-size: 11.67px;">CSharp</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

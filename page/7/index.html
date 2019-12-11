@@ -1,0 +1,422 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 7 頁 | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-11T11:31:09.000Z"><a href="/2015/04/11/vagrant-install-on-mac/">2015-04-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/04/11/vagrant-install-on-mac/">安裝 Vagrant 在 Mac 上</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>簡單的在 Mac 安裝 <a href="https://www.vagrantup.com/" target="_blank" rel="noopener">Vagrant</a> 環境</p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/04/11/vagrant-install-on-mac/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-25T11:56:15.000Z"><a href="/2015/03/25/entityframework-fakedbset/">2015-03-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/25/entityframework-fakedbset/">Entity Framework FakeDbSet</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>為了單元測試，需要作假資料，如果用資料庫來做，就需要考慮測試資料的建立以及 Transaction 的問題，因為建立測試資料後還得刪除。</p>
+<p>所以可以使用 Mock 的方式，把 <em>IDbSet</em> 改成使用 InMemory</p>
+<p>目前 <a href="">Nuget.org</a> 就有一個套件，可以幫忙你實作 <em>InMemorySet</em>
+我目前是安裝 <a href="https://www.nuget.org/packages/AnotherFakeDbSet/" target="_blank" rel="noopener">AnotherFakeDbSet</a>，Source 在 <a href="https://github.com/realistschuckle/FakeDbSet" target="_blank" rel="noopener">Github-AnotherFakeDbSet</a></p>
+<p>這個 Source 的原始版本是 <a href="https://github.com/a-h/FakeDbSet" target="_blank" rel="noopener">FakeDbSet</a>
+不過我也覺得 <a href="https://www.nuget.org/packages/AnotherFakeDbSet/" target="_blank" rel="noopener">AnotherFakeDbSet</a> 改的不錯，而且因為陸續有推出新版本，所以我自己也是採用這個 Nuget Package</p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/03/25/entityframework-fakedbset/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-25T09:00:00.000Z"><a href="/2015/03/25/log4net-actionlog/">2015-03-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/25/log4net-actionlog/">log4net Action Log 設定</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>我之前設定網站執行的 Action Log 的一個記錄，有些東西都是拼拼湊湊出來的，並不見得是最佳版本     </p>
+<p>log4net 設定檔  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">log4net</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">root</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">level</span> <span class="attr">value</span>=<span class="string">"DEBUG"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"stdout"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"ActionLogRollingFile"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"ActionLogRollingFile"</span> <span class="attr">type</span>=<span class="string">"log4net.Appender.RollingFileAppender"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">file</span> <span class="attr">type</span>=<span class="string">"log4net.Util.PatternString"</span> <span class="attr">value</span>=<span class="string">"action.log"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">appendToFile</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">encoding</span> <span class="attr">value</span>=<span class="string">"utf-8"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">maxSizeRollBackups</span> <span class="attr">value</span>=<span class="string">"30"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">rollingStyle</span> <span class="attr">value</span>=<span class="string">"Date"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">datePattern</span> <span class="attr">value</span>=<span class="string">"'.'yyyy-MM-dd"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">layout</span> <span class="attr">type</span>=<span class="string">"log4net.Layout.PatternLayout"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="tag">&lt;<span class="name">conversionPattern</span> <span class="attr">value</span>=<span class="string">"(%date&#123;HH:mm:ss,fff&#125;) [%t] - %u %5property&#123;Duration&#125; %property&#123;StatusCode&#125; %6property&#123;Method&#125; %property&#123;Uri&#125; %m%n "</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">type</span>=<span class="string">"log4net.Filter.LoggerMatchFilter"</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            <span class="tag">&lt;<span class="name">acceptOnMatch</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="tag">&lt;<span class="name">LoggerToMatch</span> <span class="attr">value</span>=<span class="string">"Sample.Web.Filters.WebApiActionFilter"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">type</span>=<span class="string">"log4net.Filter.DenyAllFilter"</span> /&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">log4net</span>&gt;</span></span></pre></td></tr></table></figure>
+
+
+<p>其中要注意的是</p>
+<ul>
+<li>log4net.Filter.LoggerMatchFilter: 用來設定特定的 class 記錄才使用這個 Appender  <ul>
+<li>acceptOnMatch: 這個設定有點像是 blacklist/whitelist，true 表示有 match 才是，相當於 whitelist  </li>
+<li>LoggerToMatch: 設定要篩選的類別名稱  </li>
+</ul>
+</li>
+<li>log4net.Filter.DenyAllFilter: 篩選掉其他的 Log，不會在這個 Appender 裡面記錄  </li>
+</ul>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/03/25/log4net-actionlog/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-11T16:24:30.000Z"><a href="/2015/03/11/2015-03-11-jwt/">2015-03-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/11/2015-03-11-jwt/">JWT</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://oauth.net/2/" target="_blank" rel="noopener">OAuth2</a> 現在已經很多的網站都有實作了，像是 <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>, <a href="https://www.google.com" target="_blank" rel="noopener">Google</a>, <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>, <a href="https://github.com" target="_blank" rel="noopener">Github</a> 等網站本身都有支援 <a href="http://oauth.net/2/" target="_blank" rel="noopener">OAuth2</a> 的驗證與授權機制  </p>
+<p>最近因為專案需求，特地去研究了一下有關 Web API 做驗證授權的機制，看到網路上有很多的範例，在講解 AngularJS SPA 的登入作法，想說可以把類似的機制放到 RESTful Service 的驗證上面    </p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2015/03/11/2015-03-11-jwt/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-22T09:01:00.000Z"><a href="/2015/01/22/iphone-usb-hotspot-dns-setting/">2015-01-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/22/iphone-usb-hotspot-dns-setting/">修改 iPhone USB 個人熱點，在 Mac 的 DNS 設定</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>執行以下指令就可以～  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sudo networksetup -setdnsservers <span class="string">"iPhone USB"</span> 8.8.8.8</span></pre></td></tr></table></figure>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/6/" class="alignleft prev">上一頁</a>
+  
+  
+    <a href="/page/8/" class="alignright next">下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+  
+<script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.5.3.js'><\/script>".replace("HOST", location.hostname));
+//]]></script></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>2</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/CSharp/" style="font-size: 11.67px;">CSharp</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

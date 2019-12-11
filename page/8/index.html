@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 8 頁 | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-12-17T17:27:00.000Z"><a href="/2014/12/17/docker-behind-proxy-ubuntu/">2014-12-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/12/17/docker-behind-proxy-ubuntu/">Docker service behind proxy - Ubuntu</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>編輯 <code>/etc/default/docker</code><br>把以下 <code>export http_proxy</code> 的那一行 unmark, 然後改成你的 proxy 設定  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Docker Upstart and SysVinit configuration file</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Customize location of Docker binary (especially for development testing).</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#DOCKER="/usr/local/bin/docker"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Use DOCKER_OPTS to modify the daemon startup options.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># If you need Docker to use an HTTP proxy, it can also be specified here.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">"http://127.0.0.1:3128/"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is also a handy place to tweak where Docker's temporary files go.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#export TMPDIR="/mnt/bigdrive/docker-tmp"</span></span></pre></td></tr></table></figure>
+
+<p>重新啟動 docker service --- <code>service docker restart</code></p>
+<p>(如果你安裝的是 ubuntu 預設的 docker.io，指令就是 <code>service docker.io restart</code>)</p>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-07-16T20:04:00.000Z"><a href="/2014/07/16/git-tf-collaboration-git-some-small-set/">2014-07-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/07/16/git-tf-collaboration-git-some-small-set/">Git-Tf 協同作業，Git 的一些小設定</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本身有用 Windows, Mac 在開發系統，我其實是偏好在 Mac 編輯，因為我喜歡 <a href="http://www.sublimetext.com/3" target="_blank" rel="noopener">Sublime Text</a> !!!  </p>
+<p>不過，在 Windows 中用 Visual Studio 2013, 公司內部是規定使用 TFS （老實說我不是很喜歡，不過整個團隊以及公司都是這樣，也不得不用～）  </p>
+<p>有些時候，不想使用笨重的 VS2013，像是開發 Web Project，我還是喜歡用 <a href="http://www.sublimetext.com/3" target="_blank" rel="noopener">Sublime Text</a> 編輯，像是 javascript/html 都有不錯的開發經驗～
+所以只好用 <a href="https://gittf.codeplex.com" target="_blank" rel="noopener">git-tf</a> 來做界接～  </p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/07/16/git-tf-collaboration-git-some-small-set/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-07-12T10:00:00.000Z"><a href="/2014/07/12/dotNetConf-2014/">2014-07-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/07/12/dotNetConf-2014/">dotNetConf 2014</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://blogs.msdn.com/b/dotnet/archive/2014/07/02/dotnetconf-2014-wrapup.aspx" target="_blank" rel="noopener">dotNetConf 2014</a> 的影片已經可以在 Channel 9 找到了  </p>
+<p>我看了三個項目  </p>
+<ul>
+<li><a href="http://channel9.msdn.com/Events/dotnetConf/2014/The-State-of-NET" target="_blank" rel="noopener">(KeyNote) .Net State</a></li>
+<li><a href="http://channel9.msdn.com/Events/dotnetConf/2014/MVC-6" target="_blank" rel="noopener">Asp.Net MVC 6</a></li>
+<li><a href="http://channel9.msdn.com/Events/dotnetConf/2014/New-Innovations-in-NET-Runtime" target="_blank" rel="noopener">New Innovation in .Net</a></li>
+</ul>
+<p>老實說改變很大  </p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/07/12/dotNetConf-2014/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-07T08:11:00.000Z"><a href="/2014/03/07/5-javascript-debugging-tips-youll-start-using-today/">2014-03-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/07/5-javascript-debugging-tips-youll-start-using-today/">5 javascript debugging tips you&#39;ll start using today</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="http://berzniz.com/post/78260747646/5-javascript-debugging-tips-youll-start-using-today" target="_blank" rel="noopener">原文出處</a><br>這是前幾天在網路上看到的一篇文章，我懶得翻譯標題的部份 (其實我不太會翻譯)
+我個人覺得很有幫助，剛好最近有在寫 <a href="https://en.wikipedia.org/wiki/Single-page_application" target="_blank" rel="noopener">SPA</a> 的專案  </p>
+<p>以下是我對原文的一些自己的理解，也算是簡單的翻譯啦。<br>下面用到的瀏覽器都是 Chrome (不得不說，這真的是 Web 開發者的一大利器，比起 ie 好太多了～又快～)  </p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2014/03/07/5-javascript-debugging-tips-youll-start-using-today/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-17T00:06:00.000Z"><a href="/2013/12/17/hubot-first-try/">2013-12-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/12/17/hubot-first-try/">Hubot first try</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近剛好想學 CoffeeScript，前幾天又看到有 hubot 的新聞，所以就想說來玩一下 <a href="http://hubot.github.com/" target="_blank" rel="noopener">Hubot</a></p>
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/12/17/hubot-first-try/#more" class="more-link">還有...</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/page/7/" class="alignleft prev">上一頁</a>
+  
+  
+    <a href="/page/9/" class="alignright next">下一頁</a>
+  
+  <div class="clearfix"></div>
+</nav>
+  
+<script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.5.3.js'><\/script>".replace("HOST", location.hostname));
+//]]></script></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>2</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/CSharp/" style="font-size: 11.67px;">CSharp</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

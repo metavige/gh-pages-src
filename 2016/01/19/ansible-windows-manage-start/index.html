@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用 Ansible 管理 Windows | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  <meta name="description" content="嗯～Ansible 很好用所以很希望也可以用在 Windows 上～">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="用 Ansible 管理 Windows"/>
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-19T22:14:24.000Z"><a href="/2016/01/19/ansible-windows-manage-start/">2016-01-19</a></time>
+      
+      
+  
+    <h1 class="title">用 Ansible 管理 Windows</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>嗯～<a href="http://www.ansible.com" target="_blank" rel="noopener">Ansible</a> 很好用<br>所以很希望也可以用在 Windows 上～  </p>
+<a id="more"></a>
+
+<h2 id="開始"><a href="#開始" class="headerlink" title="開始"></a>開始</h2><ol>
+<li>首先要參考 <a href="http://docs.ansible.com/ansible/intro_windows.html#installing-on-the-control-machine" target="_blank" rel="noopener">Ansible Windows Support</a> 的文件  </li>
+<li>確認 Windows 本身的 Powershell 版本要在 3.0 以上 (沒有的話，就可以下載這個 <a href="https://github.com/cchurch/ansible/blob/devel/examples/scripts/upgrade_to_ps3.ps1" target="_blank" rel="noopener">upgrade_to_ps3.ps1</a> 來執行)  </li>
+<li>設定 winrm - 執行 <a href="https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1" target="_blank" rel="noopener">setup.ps1</a>  <ol>
+<li>Windows 7/2008R2 版本還要先安裝 <a href="">http://support.microsoft.com/kb/2842230</a></li>
+<li>Windows 8.1/2012 以後版本已經安裝了 .Net 4.0，所以不需要特別作什麼事情</li>
+</ol>
+</li>
+</ol>
+<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><p>因為想在本機測試，所以用 <a href="https://www.vagrantup.com" target="_blank" rel="noopener">Vagrant</a> 來測試  </p>
+<ol>
+<li>我這次用的是 <a href="https://atlas.hashicorp.com/opentable/boxes/win-2012r2-standard-amd64-nocm" target="_blank" rel="noopener">win2012-r2</a> 的 box</li>
+<li>很簡單的用 <code>vagrant init opentable/win-2012r2-standard-amd64-nocm; vagrant up --provider virtualbox</code> 就可以啟動了 </li>
+<li>當然，需要進入 Windows 裡面去設定 winrm，參考上面的步驟，但是我懶得手動下載後才執行，所以我用了 <a href="https://chocolatey.org" target="_blank" rel="noopener">chocolatey</a> 的技巧，直接下載後執行。開啟 Powershell 視窗，執行下面指令就可以：   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">iex ((new-object net.webclient).DownloadString(&#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;ansible&#x2F;ansible&#x2F;devel&#x2F;examples&#x2F;scripts&#x2F;ConfigureRemotingForAnsible.ps1&#39;))</span></pre></td></tr></table></figure></li>
+<li>執行完畢之後，我本來以為可以直接用 <a href="https://www.vagrantup.com" target="_blank" rel="noopener">Vagrant</a> 的 provision 功能，結果碰壁了～</li>
+</ol>
+<h2 id="問題一"><a href="#問題一" class="headerlink" title="問題一"></a>問題一</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ ansible default -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory -m win_ping -vvvv</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">default | FAILED! =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"failed"</span>: <span class="literal">true</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"msg"</span>: <span class="string">"ERROR! ssl: 500 WinRMTransport. [SSL: UNKNOWN_PROTOCOL] unknown protocol (_ssl.c:590)"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>原本以為直接用 <a href="https://www.vagrantup.com" target="_blank" rel="noopener">Vagrant</a> 產生的 inventory 檔案就可以執行，所以先用 <code>win_ping</code> 指令測試一下<br>結果就出現了上面的錯誤<br>找了一下資料以及對照 <a href="https://www.vagrantup.com" target="_blank" rel="noopener">Vagrant</a> 產生的 <code>vagrant_ansible_inventory</code> 檔案，才發現他產生出來的檔案是這樣：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># Generated by Vagrant</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">default ansible_connection&#x3D;winrm ansible_ssh_host&#x3D;127.0.0.1 ansible_ssh_port&#x3D;55985 ansible_ssh_user&#x3D;&#39;vagrant&#39; ansible_ssh_pass&#x3D;&#39;vagrant&#39;</span></pre></td></tr></table></figure>
+
+<p>麻煩的是，產生出來的 <code>ansible_ssh_port</code> 走的是 http port<br>內部啟動 winrm 會有兩個 port，對應 http/https。分別是 5985/5986<br>virtualbox 會幫忙 mapping 這兩個 port，分別對應 55985/55986<br>但是 ansible 需要走 https，所以就出現了上面的錯誤訊息  </p>
+<p>改法就是自己產生一個 inventory 檔案 (你不能改 .vagrant 下面產生出來的檔案，因為每次執行 vagrant provision 都會重新產生)  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[windows]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">default ansible_connection&#x3D;winrm ansible_ssh_host&#x3D;127.0.0.1 ansible_ssh_port&#x3D;55986 ansible_ssh_user&#x3D;&#39;vagrant&#39; ansible_ssh_pass&#x3D;&#39;vagrant&#39;</span></pre></td></tr></table></figure>
+
+<h2 id="問題二"><a href="#問題二" class="headerlink" title="問題二"></a>問題二</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ ansible windows -i hosts -m win_ping -vvvv</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">default | FAILED! =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"failed"</span>: <span class="literal">true</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"msg"</span>: <span class="string">"ERROR! ssl: 500 WinRMTransport. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>本來以為改完後，一切幸福美滿～ 結果一執行就給我拋另外一個錯誤<br>不過這個錯誤看起來就是 SSL 憑證問題！靠！這怎麼改？？？    </p>
+<blockquote>
+<p>我前兩天升級了 Ansible 2.0，所以我還在想說是不是因為這個原因</p>
+</blockquote>
+<p>果不其然，找到了這篇文章: <a href="http://everythingshouldbevirtual.com/packer-vagrant-ansible-windows-winrmtransport-error" target="_blank" rel="noopener">Packer – Vagrant – Ansible – Windows (WinRMTransport Error)</a><br>Ansible 也有一個 <a href="https://github.com/ansible/ansible/issues/10294" target="_blank" rel="noopener">Issue</a> 在解釋這個問題<br>改法就是，在現在的目錄下，建立一個 <code>callback_plugins</code> 目錄。然後建立一個 <code>fix_ssl.py</code> 檔案:  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ssl</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> hasattr(ssl, <span class="string">'_create_default_https_context'</span>) <span class="keyword">and</span> hasattr(ssl, <span class="string">'_create_unverified_context'</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ssl._create_default_https_context = ssl._create_unverified_context</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CallbackModule</span><span class="params">(object)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">pass</span></span></pre></td></tr></table></figure>
+
+<p>根據這段程式碼英文的意思，我猜測就是忽略自簽章的 SSL 憑證驗證～因為我在 .Net 幹過一樣的事情～  </p>
+<p>所以這次執行就成功了～  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ ansible windows -i hosts -m win_ping -vvvv</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">default | SUCCESS =&gt; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"changed"</span>: <span class="literal">false</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"invocation"</span>: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"module_name"</span>: <span class="string">"win_ping"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"ping"</span>: <span class="string">"pong"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>以上是我碰到的兩個問題，還好網路都有找到解法～<br>所以之後應該只需要參考 <a href="http://docs.ansible.com/ansible/list_of_windows_modules.html" target="_blank" rel="noopener">Windows Modules</a> 試試看用法，應該之後就可以拿來管理 Windows 了～  </p>
+<p>不過可能還是要注意下面的事情：  </p>
+<ul>
+<li>注意自己安裝的 <a href="http://www.ansible.com" target="_blank" rel="noopener">Ansible</a> 版本，我目前測試的版本是 2.0，所以我不知道 1.x 版本是不是沒有我遇到的問題  </li>
+<li>注意 winrm 設定，因為我這次測試是用 Vagrant box，所以是直接用 Port forwarding 做到。<br>如果是實機，就得自己去找 winrm 的 port  </li>
+<li>之後如果要在實機測試的話，可能還要另外注意帳號密碼問題</li>
+</ul>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/ansible/">ansible</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+
+	
+	  <a data-flip-widget="flipit" href="https://flipboard.com" target="_blank" rel="noopener">Add to Flipboard Magazine.</a><script src="https://cdn.flipboard.com/web/buttons/js/flbuttons.min.js" type="text/javascript"></script>
+	
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+	
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>2</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/CSharp/" style="font-size: 11.67px;">CSharp</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

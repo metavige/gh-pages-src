@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>docker-machine for AmazonEC2 | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  <meta name="description" content="前兩天在公司上了 Introduction Docker 的課程，回家就來試驗新的 docker-machine花了一點時間，研究了怎樣連接到 AWS 去～">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="docker-machine for AmazonEC2"/>
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-04-12T09:49:28.000Z"><a href="/2015/04/12/docker-machine-aws-provider/">2015-04-12</a></time>
+      
+      
+  
+    <h1 class="title">docker-machine for AmazonEC2</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前兩天在公司上了 Introduction Docker 的課程，回家就來試驗新的 docker-machine<br>花了一點時間，研究了怎樣連接到 <a href="https://aws.amazon.com/tw/" target="_blank" rel="noopener">AWS</a> 去～  </p>
+<a id="more"></a>
+
+<p>如果你打 <code>docker-machine create</code> 這個指令，大概就會出現以下的資料，告訴你要打的參數  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">NAME:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   create - Create a machine</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">USAGE:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   command create [command options] [arguments...]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">OPTIONS:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-access-key 												AWS Access Key [$AWS_ACCESS_KEY_ID]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-ami 													AWS machine image [$AWS_AMI]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-iam-instance-profile 											AWS IAM Instance Profile</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-instance-type "t2.micro"											AWS instance type [$AWS_INSTANCE_TYPE]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-region "us-east-1"											AWS region [$AWS_DEFAULT_REGION]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-root-size "16"												AWS root disk size (in GB) [$AWS_ROOT_SIZE]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-secret-key 												AWS Secret Key [$AWS_SECRET_ACCESS_KEY]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-security-group "docker-machine"										AWS VPC security group [$AWS_SECURITY_GROUP]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-session-token 												AWS Session Token [$AWS_SESSION_TOKEN]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-subnet-id 												AWS VPC subnet id [$AWS_SUBNET_ID]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-vpc-id 													AWS VPC id [$AWS_VPC_ID]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">   --amazonec2-zone "a"													AWS zone for instance (i.e. a,b,c,d,e) [$AWS_ZONE]</span></pre></td></tr></table></figure>
+
+<p>最前面的，就是 aws 所需要的參數。<br>我找了一下網路的文章，發現這篇是有比較多的說明，針對 docker-machine provider 的部份  </p>
+<p><a href="">http://flurdy.com/docs/docker/docker_compose_machine_swarm_cloud.html</a>  </p>
+<p>按照這篇文章的作法，大概只需要以下的參數就可以  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">docker-machine create \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">--driver amazonec2 \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">--amazonec2-access-key your-aws-access-key \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">--amazonec2-secret-key your-aws-secret-key \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">--amazonec2-vpc-id your-aws-vpc-id \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">--amazonec2-subnet-id your-aws-subnet-id \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">--amazonec2-region us-east-1 \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">--amazonec2-zone a \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">ec2box</span></pre></td></tr></table></figure>
+
+<p>不過因為我是新手，所以嘗試了蠻多次才找到這些參數到哪邊去做  </p>
+<h2 id="Access-Key-Secret-Key"><a href="#Access-Key-Secret-Key" class="headerlink" title="Access Key/Secret Key"></a>Access Key/Secret Key</h2><p>這部份我嘗試最久，因為我其實搞不太懂這是要到哪裡去抓，後來才知道這是要到 <a href="https://console.aws.amazon.com/iam/home" target="_blank" rel="noopener">IAM</a> 去做的。  </p>
+<h3 id="Create-a-group"><a href="#Create-a-group" class="headerlink" title="Create a group"></a>Create a group</h3><p>進到 <a href="https://console.aws.amazon.com/iam/home" target="_blank" rel="noopener">IAM</a> 之後，先建立一個 Group，步驟很簡單，只要輸入名稱以及選擇 Policy 就好了<br>名稱隨便 (我是叫 docker-user)<br>然後記得加入 Policy，我是加入 AmazonEC2FullAccess (也可以給他 Administrator)  </p>
+<p>建立之後，Group 的資料大概像這樣:<br><img src="IAM_Management_Console_Group.png" alt="Create IAM Group"></p>
+<h3 id="Create-a-user"><a href="#Create-a-user" class="headerlink" title="Create a user"></a>Create a user</h3><p>接下來建立一個 User， 你一次可以建立五個 User，不過我是先建立一個，接下來的畫面，蠻重要的，他會給你這個 User 的 Security Credentials，這就是我們要的資料了！  </p>
+<p>Access Key ID 對應的就是 --amazonec2-access-key 參數<br>Secret Access Key 對應的就是 --amazonec2-secret-key 參數  </p>
+<p><img src="IAM_Management_Console_user_sec.png" alt="User Security Credentials"></p>
+<p>這邊你可以點選 &quot;Show User Security Credentials&quot; 來顯示 Access Key ID 以及 Security Access Key，或者是點選畫面下方的 &quot;Download Credentials&quot; 把檔案下載下來再看都可以  </p>
+<p><img src="IAM_Management_Console_user_show_cred.png" alt="User Show Credentials"></p>
+<p>建立完 User 之後，記得把這個 User 加入到上面我們建立的 Group 去，之後才有權限可以使用 EC2  </p>
+<p><img src="user_detail.png" alt="User Detail"></p>
+<h3 id="Generate-AWS-Signing-Certificates"><a href="#Generate-AWS-Signing-Certificates" class="headerlink" title="Generate AWS Signing Certificates"></a>Generate AWS Signing Certificates</h3><p>這個步驟也蠻重要的，因為如果你不做這個步驟，其實你建立的 User 是不能呼叫 EC2 的 Web Service 的 (我碰壁了很久.....)  </p>
+<p>我參考了這篇文章<br><a href="">http://www.markbartel.ca/2012/04/creating-key-pairs-for-amazon-ec2.html</a>  </p>
+<p>先執行    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">openssl req -x509 -newkey rsa:2048 -passout pass:a -keyout kx -out cert</span></pre></td></tr></table></figure>
+<p>這個步驟是在建立 ssl 證書資料，會需要你填一些東西  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Country Name (2 letter code) [AU]: [這邊我是填 TW]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">State or Province Name (full name) [Some-State]: [這邊我是填 Taiwan]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Locality Name (eg, city) []: [這邊我是填 Taipei]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Organizational Unit Name (eg, section) []:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Common Name (e.g. server FQDN or YOUR name) []:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">Email Address []: [這邊填電子郵件]</span></pre></td></tr></table></figure>
+<p>沒填的地方我是直接 Enter 就過去了～<br>這樣會產生 kx, cert 檔案</p>
+<p>然後執行以下步驟  </p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">openssl rsa -passin pass:a -in kx -out key</span></pre></td></tr></table></figure>
+<p>這個步驟會產生 key 檔案</p>
+<p>不過我們主要是要用到 cert 這個檔案 (目前我還不知道其他檔案的用途，不過還是建議先保留下來～)  </p>
+<p>選擇剛剛建立的 User，選擇 Manage Security Credentials 功能，準備上傳 cert 資料  </p>
+<p><img src="set_sec_cred.png" alt="Manage Security Credentials"></p>
+<p>進去功能的第一個畫面是一些說明，你可以直接到下一步驟，把 cert 檔案內容貼到下一個畫面的 Certificate Body 格子內，然後按下 &quot;Upload Signing Certificate&quot; 按鈕就好 ...   </p>
+<p>如果一切都順利完成，User 的資料就應該像是下面這樣，<br><img src="user_detail_sec.png" alt="User Detail for Sec"></p>
+<p>這樣，你就可以往下面做了～  </p>
+<h2 id="Vpc-ID"><a href="#Vpc-ID" class="headerlink" title="Vpc-ID"></a>Vpc-ID</h2><p>到 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a> 的介面，去抓到 default security group 的 vpc-id<br>這就是我們要用的 --amazonec2-vpc-id  </p>
+<h2 id="Subnet-ID"><a href="#Subnet-ID" class="headerlink" title="Subnet-ID"></a>Subnet-ID</h2><p>到 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a> 的介面，到 Network Interfaces 功能，建立一組新的 Network Interface。<br>(因為蠻簡單的，都用預設值就可以)<br>然後，找到 subnet-id<br>這就是 --amazonec2-subnet-id 參數  </p>
+<blockquote>
+<p>2014-04-12 14:50 更正：
+根據 Docker 官網文件，以及實際測試結果，其實，subnet-id 並不是必要條件，所以，其實可以不要輸入～這也就是我為什麼之前有個疑問是，我自己建立了一個 Network Interface，他卻又會另外建立一個新的 Network Interface 了～我本來以為 subnet-id 是要我提供的～</p>
+</blockquote>
+<h2 id="Create-a-new-docker-machine"><a href="#Create-a-new-docker-machine" class="headerlink" title="Create a new docker-machine"></a>Create a new docker-machine</h2><p>把之前的步驟找到的所有參數，組合在一起<br>至於 --amazonec2-region ，你可以到 <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html" target="_blank" rel="noopener">Regions and Avaliable Zones</a> 文件中自己去挑選你喜歡的地方<br>而 --amazonec2-zone，你是要進入到該 region 的 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a> Dashboard 介面去看他 Service Health 的部份，會告訴你有哪些 Available Zones  </p>
+<p>像我是挑 Singapore，就是 ap-southeast-1<br>Zone 的話，我是挑了 b zone  </p>
+<p>就像這樣～  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">docker-machine create \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">--driver amazonec2 \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">--amazonec2-access-key [Access Key ID] \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">--amazonec2-secret-key [Secret Access Key] \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">--amazonec2-vpc-id [Default SecurityGroup VPC ID] \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">--amazonec2-region ap-southeast-1 \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">--amazonec2-zone b \</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">ec2box</span></pre></td></tr></table></figure>
+
+<p>最後面的 ec2box 是你要給 docker-machine 的名稱，如果一切都 ok，做完之後你在 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a> 內就會看到一組建立好的 t2.micro instance。  </p>
+<p><img src="ec2-instance.png" alt="EC2 Instance">  </p>
+<h2 id="玩完回收"><a href="#玩完回收" class="headerlink" title="玩完回收"></a>玩完回收</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">docker-machine rm -f ec2box</span></pre></td></tr></table></figure>
+
+<p>這個指令會把之前建立的 ec2 instance 以及相關的設定都刪掉<br>因為 <a href="https://aws.amazon.com/tw/" target="_blank" rel="noopener">AWS</a> 要錢，所以～如果你只是玩玩就好，記得刪掉～<br>否則收到帳單，我也沒辦法.....   </p>
+<h2 id="建立時可能發生的問題"><a href="#建立時可能發生的問題" class="headerlink" title="建立時可能發生的問題"></a>建立時可能發生的問題</h2><p>如果建立時，發生任何問題，沒有建立成功，你可能都要注意以下事情</p>
+<ol>
+<li>有可能 docker-machine 資料已經建立，但是無法連上 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a>，這樣的話，你需要自己手動刪除 docker-machine，指令是 <code>docker-machine rm -f ec2box</code>。你可以先用 <code>docker-machine ls</code> 檢查一下～    </li>
+<li>每次建立的時候，docker-machine 會與 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a> 交換 key-pair，所以如果建立到一半失敗，你得先自己手動到 <a href="https://console.aws.amazon.com/ec2/v2/home" target="_blank" rel="noopener">EC2</a> 把 ec2box 這個 keypair 刪掉再重新建立，不然就會發生 keypair 重複的問題。</li>
+<li>如果發生 401 的錯誤，請檢查使用者的資料設定是否有問題 (是說按照步驟來應該可以)。  </li>
+<li>你給的 vpc-id 一定要是你建立那個 region/zone 的 default security group vpc-id，不然會告訴你沒有這個 vpc-id</li>
+</ol>
+<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
+<li><a href="">https://docs.docker.com/machine/?hc_location=ufi#amazon-web-services</a></li>
+</ul>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/程式開發/">程式開發</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/docker/">docker</a>, <a href="/tags/AWS/">AWS</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+
+	
+	  <a data-flip-widget="flipit" href="https://flipboard.com" target="_blank" rel="noopener">Add to Flipboard Magazine.</a><script src="https://cdn.flipboard.com/web/buttons/js/flbuttons.min.js" type="text/javascript"></script>
+	
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+	
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>24</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>2</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>9</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/CSharp/" style="font-size: 11.67px;">CSharp</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.67px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 16.67px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/golang/" style="font-size: 13.33px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 20px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 15px;">reactjs</a> <a href="/tags/redux/" style="font-size: 15px;">redux</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
