@@ -14,7 +14,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@master
         env:
           GITHUB_PAGE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKENS }}
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKENS }}
           BASE_BRANCH: pages-src
           BRANCH: master
           FOLDER: public
