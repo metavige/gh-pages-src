@@ -6,11 +6,11 @@ tags:
 - docker
 ---
 
-# Docker 的反模式
-
 針對網路上面的文章，加上自己的解釋，說明如何避免做到 Docker 的反模式
 
 原始文章: [Docker Anti-Pattern](https://medium.com/containers-101/docker-anti-patterns-ad2a1fcd5ce1)
+
+<!--more-->
 
 ## 反模式 1: 將 Docker 視為虛擬機器 (VM)
 
