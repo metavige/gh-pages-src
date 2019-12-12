@@ -8,12 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v1
 
       - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
+        uses: JamesIves/github-pages-deploy-action@releases/v3.0.4
         env:
-          GITHUB_PAGE: true
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKENS }}
           BASE_BRANCH: pages-src
           BRANCH: master
