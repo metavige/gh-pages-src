@@ -16,4 +16,4 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKENS }}
           BASE_BRANCH: pages-src
           BRANCH: master
-          FOLDER: public
+          FOLDER: ./public
