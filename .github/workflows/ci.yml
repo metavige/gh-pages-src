@@ -17,4 +17,3 @@ jobs:
           BASE_BRANCH: pages-src
           BRANCH: master
           FOLDER: public
-          BUILD_SCRIPT: npm install && npm run generate

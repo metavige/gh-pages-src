@@ -6,7 +6,7 @@
     "version": "4.0.0"
   },
   "scripts": {
-    "generate": "hexo clean && hexo generate",
+    "build": "hexo clean && hexo generate",
     "start": "hexo server"
   },
   "dependencies": {
