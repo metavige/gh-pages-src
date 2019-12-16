@@ -153,7 +153,7 @@ Flux 目前是 CNCF 的 Sandbox 項目 (2019.08.20)
 
 <p>透過上方的設定， flux 會檢查目前要部署的 Image 中是否有新的 Tag，如果有，就會同時間修改 YML 以及 kubernetes 的設定，並且同步推送變更到 Git 去</p>
 <h2 id="跟-Flux-相關的一些注意事項"><a href="#跟-Flux-相關的一些注意事項" class="headerlink" title="跟 Flux 相關的一些注意事項"></a>跟 Flux 相關的一些注意事項</h2><h3 id="存取-private-registry"><a href="#存取-private-registry" class="headerlink" title="存取 private registry"></a>存取 private registry</h3><p>一般如果需要存取 Docker Private Registry，通常會在 Docker Host 內設定 insecure-registry，但是初步設定 flux 時，發現無法讀取 docker daemon.json 內 insecure-registry 的設定</p>
-<p>設定方式目前未測試出來，設定方式可能可以參考 <a href="">https://github.com/fluxcd/flux/pull/1314</a></p>
+<p>基本上是可以透過設定 <code>--registry-insecure-host</code> 來達到檢查 Private Registry 的功能。不過如果 Private Regsitry 有設定權限，可能需要參考參考 <a href="">https://github.com/fluxcd/flux/pull/1314</a> 來設定 (目前沒有測試)</p>
 <h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>目前 Flux 的機制，是透過偵測 Git Repository 以及 Docker Registry 變更，來做到 Continuous Delivery 的機制，但是目前預設只會做到 Create/Update 的動作，如果開發者刪除了 Git Repository 內的設定，並不會刪除 kubernetes 內已經建立好的設定。</p>
 <p>如果有需要做到刪除異動的變更處理，可能需要設定 <code>—sync-garbage-collection</code>，但預設的作法會是保守的，因為通常裡面不會只有由 <code>flux</code> 建立的資源。</p>
 <h3 id="影響變更時間"><a href="#影響變更時間" class="headerlink" title="影響變更時間"></a>影響變更時間</h3><p>基本上，這邊的影響變更時間受到幾個時間影響，一個是掃描 GIT 的時間，一個是掃描 Docker Registry 的時間。</p>
