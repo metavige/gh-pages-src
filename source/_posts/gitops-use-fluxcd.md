@@ -12,8 +12,7 @@ tags:
 
 > Flux 目前是 CNCF 的 Sandbox 項目 (2019.08.20)
 
-[Image: https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png]
-圖片出處: https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png
+![圖片出處: https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png][https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png]
 
 <!--more-->
 
