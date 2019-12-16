@@ -8,8 +8,6 @@ tags:
 - devops
 ---
 
-# GitOps - use fluxcd
-
 [](https://fluxcd.io/)
 
 > Flux 目前是 CNCF 的 Sandbox 項目 (2019.08.20)
