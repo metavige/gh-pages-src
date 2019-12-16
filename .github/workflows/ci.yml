@@ -15,7 +15,7 @@ jobs:
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
-        env:
+        with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKENS }}
           BASE_BRANCH: pages-src
           BRANCH: master
