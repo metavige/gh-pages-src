@@ -14,7 +14,7 @@ tags:
 
 ![](https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png)
 
-圖片出處: [https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png]()
+圖片出處: https://rammusxu.github.io/2019/07/03/gitops-flux-note/flux-flow.png
 
 <!--more-->
 
@@ -30,13 +30,13 @@ tags:
 
 ### 安裝 fluxctl
 
-參考 [https://docs.fluxcd.io/en/stable/references/fluxctl.html]()
+參考 https://docs.fluxcd.io/en/stable/references/fluxctl.html
 
 ### 準備好一個 Git Repository
 
 準備一個簡單的 repository，存放要設定的 yml
 
-如果使用的是公司內部的 git repository，需要先參考 [https://docs.fluxcd.io/en/stable/guides/use-private-git-host.html]() 的設定，將 known_hosts 設定到 Pod 內的 `~/.ssh/known_hosts` 檔案內，不然會無法連線。下方安裝步驟有說明。
+如果使用的是公司內部的 git repository，需要先參考 https://docs.fluxcd.io/en/stable/guides/use-private-git-host.html 的設定，將 known_hosts 設定到 Pod 內的 `~/.ssh/known_hosts` 檔案內，不然會無法連線。下方安裝步驟有說明。
 
 Git Repository 內可以有目錄的規劃，管理不同種類的設定，fluxcd 會掃描子目錄內的變更。
 
@@ -88,7 +88,7 @@ $ fluxctl install \
 
 透過 `ssh-keyscan` 指令，用來取得 ssh server 的公鑰，這個動作，是要把這組公鑰，放在 fluxcd 的 POD 中的 `~/.ssh/know_hosts` 檔案內，讓 fluxcd 的 POD 可以透過 ssh 連線到 git 的服務器。
 
-參考 [https://docs.fluxcd.io/en/stable/guides/use-private-git-host.html]()  
+參考 https://docs.fluxcd.io/en/stable/guides/use-private-git-host.html   
 
 為了要放到 kubernetes 去，參考了 flux 的文件，產生下方的 `flux-ssh.config.yml`
 
@@ -140,7 +140,7 @@ name 是參考 `fluxcd.yml` 中的定義，namespace 參考上方設定
 - --registry-insecure-host=private.registry.xxxx
 ```
 
-上方的設定，參考 [https://docs.fluxcd.io/en/stable/references/daemon.html]() 內的參數說明來調整
+上方的設定，參考 https://docs.fluxcd.io/en/stable/references/daemon.html 內的參數說明來調整
 
 ### 啟動 fluxcd
 
@@ -155,7 +155,7 @@ name 是參考 `fluxcd.yml` 中的定義，namespace 參考上方設定
 > 這邊建立的 ssh public/private key，會存放到 kubernetes volume內，如果有重新建立 fluxcd 的動作，並不需要重新設定 git user ssh key。
 
 
-目前設定 Git 的存取，也可以事先產生好 SSH Key，可以參考 [https://docs.fluxcd.io/en/stable/guides/provide-own-ssh-key.html]()
+目前設定 Git 的存取，也可以事先產生好 SSH Key，可以參考 https://docs.fluxcd.io/en/stable/guides/provide-own-ssh-key.html
 
 ### 啟動 yml 內的自動處理機制
 
@@ -175,7 +175,7 @@ name 是參考 `fluxcd.yml` 中的定義，namespace 參考上方設定
 
 一般如果需要存取 Docker Private Registry，通常會在 Docker Host 內設定 insecure-registry，但是初步設定 flux 時，發現無法讀取 docker daemon.json 內 insecure-registry 的設定
 
-基本上是可以透過設定 `--registry-insecure-host` 來達到檢查 Private Registry 的功能。不過如果 Private Regsitry 有設定權限，可能需要參考參考 [https://github.com/fluxcd/flux/pull/1314]() 來設定 (目前沒有測試)
+基本上是可以透過設定 `--registry-insecure-host` 來達到檢查 Private Registry 的功能。不過如果 Private Regsitry 有設定權限，可能需要參考參考 https://github.com/fluxcd/flux/pull/1314 來設定 (目前沒有測試)
 
 ### Git
 
@@ -189,14 +189,14 @@ name 是參考 `fluxcd.yml` 中的定義，namespace 參考上方設定
 
 目前內部預設的掃描時間，都是五分鐘，其中影響的參數有兩個，一個是 `—sync-interval` (控制同步設定到 kubernetes 的頻率)，一個是 `—git-poll-interval` (查詢 git 新的 commit 的頻率)。
 
-參考 [https://docs.fluxcd.io/en/stable/faq.html]()，建議如果要較快速的影響變更，調整 `—git-poll-interval` 會比較好。
+參考 https://docs.fluxcd.io/en/stable/faq.html ，建議如果要較快速的影響變更，調整 `—git-poll-interval` 會比較好。
 
 ## 參考
 
-* [https://www.weave.works/technologies/gitops/]()
-* [https://github.com/fluxcd/flux]()
-* [https://docs.fluxcd.io/en/stable/]()
-* [https://www.servicemesher.com/blog/flux-get-start-easy/]()
+* https://www.weave.works/technologies/gitops/
+* https://github.com/fluxcd/flux
+* https://docs.fluxcd.io/en/stable/
+* https://www.servicemesher.com/blog/flux-get-start-easy/
 
 
 
