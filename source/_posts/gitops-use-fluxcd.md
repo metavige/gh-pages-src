@@ -175,7 +175,7 @@ name 是參考 `fluxcd.yml` 中的定義，namespace 參考上方設定
 
 一般如果需要存取 Docker Private Registry，通常會在 Docker Host 內設定 insecure-registry，但是初步設定 flux 時，發現無法讀取 docker daemon.json 內 insecure-registry 的設定
 
-設定方式目前未測試出來，設定方式可能可以參考 [https://github.com/fluxcd/flux/pull/1314]()
+基本上是可以透過設定 `--registry-insecure-host` 來達到檢查 Private Registry 的功能。不過如果 Private Regsitry 有設定權限，可能需要參考參考 [https://github.com/fluxcd/flux/pull/1314]() 來設定 (目前沒有測試)
 
 ### Git
 
