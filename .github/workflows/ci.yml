@@ -10,11 +10,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Build and Deploy
+      - name: Build
+        run: npm install && npm run build
+
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         env:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKENS }}
           BASE_BRANCH: pages-src
           BRANCH: master
           FOLDER: public
-          BUILD_SCRIPT: npm install && npm run build
