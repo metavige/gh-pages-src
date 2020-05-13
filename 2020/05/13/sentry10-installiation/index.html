@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sentry 10 onpromise installation | @metavige</title>
+  <meta name="author" content="metavige (Ricky Chiang)">
+  
+  <meta name="description" content="Log 紀錄，在 DevOps 的情境中，其實是一個很重要的項目，所有的系統在上線的時候，都應該要有適當的 Log 紀錄以方便後續的問題追蹤，尤其是在 Microservice 的設計上面  
+當你的服務或系統是以 docker container 的方式啟動，如果只是以 container stdout/stderr 的方式來取得紀錄，實際上後續的追蹤並不容易，所以我自己找了一下網路上的解決方案，找到了 sentry 的這套系統。
+而在公司內部使用，如果公司環境並不允許 Log 紀錄在外部的網站，就需要考慮 Self-Hosted 的建置，剛好 sentry 有提供 onpromise 的部分，就找了這個 source 來驗證一下在本地端建置 sentry 的步驟。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Sentry 10 onpromise installation"/>
+  <meta property="og:site_name" content="@metavige"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="true" title="@metavige" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-60626505-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">@metavige</a></h1>
+  <h2><a href="/">生命會自己找到出路，程式 Bug 不會自己修復，孩子～</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-05-13T09:18:07.000Z"><a href="/2020/05/13/sentry10-installiation/">2020-05-13</a></time>
+      
+      
+  
+    <h1 class="title">Sentry 10 onpromise installation</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Log 紀錄，在 DevOps 的情境中，其實是一個很重要的項目，所有的系統在上線的時候，都應該要有適當的 Log 紀錄<br>以方便後續的問題追蹤，尤其是在 Microservice 的設計上面  </p>
+<p>當你的服務或系統是以 <code>docker</code> container 的方式啟動，如果只是以 container stdout/stderr 的方式來取得紀錄，實際上後續的追蹤並不容易，所以我自己找了一下網路上的解決方案，找到了 <a href="https://sentry.io/" target="_blank" rel="noopener">sentry</a> 的這套系統。</p>
+<p>而在公司內部使用，如果公司環境並不允許 Log 紀錄在外部的網站，就需要考慮 Self-Hosted 的建置，剛好 sentry 有提供 onpromise 的部分，就找了這個 source 來驗證一下在本地端建置 sentry 的步驟。</p>
+<a id="more"></a>
+
+<h2 id="Self-Hosted-下載"><a href="#Self-Hosted-下載" class="headerlink" title="Self-Hosted 下載"></a>Self-Hosted 下載</h2><ul>
+<li>根據官方網站的說明，需要先下載 <a href="https://github.com/getsentry/onpremise" target="_blank" rel="noopener">onpremise</a> 的原始碼。  </li>
+<li>需要先安裝好 <code>docker</code> 跟 <code>docker-compose</code>，版本號可以參考原始碼中的 <code>README.md</code></li>
+</ul>
+<h2 id="建置-onpromise"><a href="#建置-onpromise" class="headerlink" title="建置 onpromise"></a>建置 onpromise</h2><ul>
+<li>前置作業，其實是會先根據下載的原始碼，去 build sentry 的 image 出來</li>
+<li>可以直接執行 <code>./install.sh</code>，來直接建置 onpromise 的 image。不過如果要指定 sentry 版本的話，可以先設定好環境變數 <code>SENTRY_IMAGE=getsentry/sentry:10</code> 的方式，來建置 sentry v10 的 image。</li>
+<li>如果直接執行 <code>./install.sh</code>，會將 <code>sentry</code> 目錄下的 <code>config.example.yml</code> 以及 <code>sentry.conf.example.py</code> 複製成 <code>config.yml</code> 以及 <code>sentry.conf.py</code> 兩個檔案，並且開始建置 onpromise sentry image</li>
+<li>建置完成之後，到最後一步，只要出現下面的訊息，就表示可以啟動 sentry 來使用了！</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">....</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Cleaning up...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">----------------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">You&#39;re all done! Run the following command to get Sentry running:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  docker-compose up -d</span></pre></td></tr></table></figure>
+
+<h2 id="修改設定"><a href="#修改設定" class="headerlink" title="修改設定"></a>修改設定</h2><p>因為是使用 <code>docker</code> 來啟動 sentry，所以需要修改 sentry 的 <code>SENTRY_DISALLOWED_IPS</code> 設定  </p>
+<p>下面是預設的設定值，需要將下面的設定，複製到 <code>sentry/sentry.conf.py</code> 檔案中，並且調整 <code>docker</code> 內的 IP 區段，讓 sentry 可以執行，否則會有 502 的錯誤。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SENTRY_DISALLOWED_IPS = (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'0.0.0.0/8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'10.0.0.0/8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'100.64.0.0/10'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'127.0.0.0/8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'169.254.0.0/16'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'172.16.0.0/12'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.0.0.0/29'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.0.2.0/24'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.88.99.0/24'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.168.0.0/16'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'198.18.0.0/15'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'198.51.100.0/24'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'224.0.0.0/4'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'240.0.0.0/4'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'255.255.255.255/32'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">)</span></pre></td></tr></table></figure>
+
+<p><code>docker</code> 本身的網路區段，可以到 docker for desktop 的 Resource &gt; Network 設定中去看，就可以知道。</p>
+<p>我自己的設定是 <code>192.168.65.0/24</code>，所以我的設定方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SENTRY_DISALLOWED_IPS = (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'0.0.0.0/8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'10.0.0.0/8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'100.64.0.0/10'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'127.0.0.0/8'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'169.254.0.0/16'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'172.16.0.0/12'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment"># '192.0.0.0/29',</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.0.2.0/24'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.88.99.0/24'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'192.168.0.0/16'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'198.18.0.0/15'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'198.51.100.0/24'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'224.0.0.0/4'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'240.0.0.0/4'</span>,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'255.255.255.255/32'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">)</span></pre></td></tr></table></figure>
+
+<p>如果日後在內部網路使用，就需要視情況調整設定。</p>
+<h2 id="Issue"><a href="#Issue" class="headerlink" title="Issue"></a>Issue</h2><p>在我實際測試建置的這個時間，實際上如果用 <code>SENTRY_IMAGE=getsentry/sentry:10 ./install.sh</code> 的方式建置 sentry，最後面會出現一個錯誤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Creating sentry_onpremise_postgres_1                ... done</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">upgrade: 1: exec: &#x2F;etc&#x2F;sentry&#x2F;docker-entrypoint.sh: not found</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Cleaning up...</span></pre></td></tr></table></figure>
+
+<p>這個問題，在我測試的時候，還是有 open issues 未解決：</p>
+<ul>
+<li><a href="https://github.com/getsentry/onpremise/issues/384" target="_blank" rel="noopener">https://github.com/getsentry/onpremise/issues/384</a></li>
+<li><a href="https://github.com/getsentry/onpremise/issues/412" target="_blank" rel="noopener">https://github.com/getsentry/onpremise/issues/412</a></li>
+</ul>
+<blockquote>
+<p>就算不設定 SENTRY_IMAGE，我還是有發現錯誤，所以我就沒有使用最新版本來測試。</p>
+</blockquote>
+<p>後來，去追蹤了一下問題點，發現在 <code>getsentry/sentry:10</code> 的 image 中，實際上面 <code>/etc/sentry/docker-entrypoint.sh</code> 是存在的，可是，在 <code>docker-compose.yml</code> 內卻設定了一個 volume 去指向目前本地端的 <code>sentry</code> 目錄。<br>導致這個檔案就直接被移除了，之後在建置的階段，就會發生錯誤  </p>
+<p>後來我自己從 <code>getsentry/sentry:10</code> 的 image 先把這個檔案，複製到本地端的 <code>sentry</code> 目錄，讓他 mount 到 container 內還是可以找到這個檔案，就解決了安裝問題。</p>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="https://blog.sentry.io/2019/11/06/relicensing-sentry" target="_blank" rel="noopener">https://blog.sentry.io/2019/11/06/relicensing-sentry</a></p>
+<p>目前 sentry 的 License，是使用 <code>BSL</code>，因為只是在公司內部使用，應該不會有授權問題 (只要你不是要拿 sentry 延伸的產品來賣)  </p>
+
+      
+    </div>
+    <br />
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/devops/">devops</a>, <a href="/tags/sentry/">sentry</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+
+	
+	  <a data-flip-widget="flipit" href="https://flipboard.com" target="_blank" rel="noopener">Add to Flipboard Magazine.</a><script src="https://cdn.flipboard.com/web/buttons/js/flbuttons.min.js" type="text/javascript"></script>
+	
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+	
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<div>
+  <script type="text/javascript">
+    document.write(
+      "<iframe scrolling='no' frameborder='0' sandbox='allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-storage-access-by-user-activation' style='height: 212px; width: 100%;' src='https://button.like.co/in/embed/metavige-matters/button?referrer=" +
+      encodeURIComponent(location.href.split("?")[0].split("#")[0]) + "'></iframe>");
+  </script>
+<div>
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="hidden" name="q" value="site:metavige.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分類</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/思考/">思考</a><small>2</small></li>
+  
+    <li><a href="/categories/程式開發/">程式開發</a><small>25</small></li>
+  
+    <li><a href="/categories/電腦相關/">電腦相關</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">標籤</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/AWS/">AWS</a><small>1</small></li>
+  
+    <li><a href="/tags/CSharp/">CSharp</a><small>2</small></li>
+  
+    <li><a href="/tags/EntityFramework/">EntityFramework</a><small>1</small></li>
+  
+    <li><a href="/tags/IoC/">IoC</a><small>1</small></li>
+  
+    <li><a href="/tags/MQ/">MQ</a><small>1</small></li>
+  
+    <li><a href="/tags/OAuth2/">OAuth2</a><small>1</small></li>
+  
+    <li><a href="/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tags/VCS/">VCS</a><small>1</small></li>
+  
+    <li><a href="/tags/ansible/">ansible</a><small>1</small></li>
+  
+    <li><a href="/tags/architecture/">architecture</a><small>2</small></li>
+  
+    <li><a href="/tags/babel/">babel</a><small>1</small></li>
+  
+    <li><a href="/tags/backbonejs/">backbonejs</a><small>1</small></li>
+  
+    <li><a href="/tags/ceph/">ceph</a><small>1</small></li>
+  
+    <li><a href="/tags/devops/">devops</a><small>2</small></li>
+  
+    <li><a href="/tags/docker/">docker</a><small>10</small></li>
+  
+    <li><a href="/tags/dotnet/">dotnet</a><small>6</small></li>
+  
+    <li><a href="/tags/elasticsearch/">elasticsearch</a><small>1</small></li>
+  
+    <li><a href="/tags/electron/">electron</a><small>1</small></li>
+  
+    <li><a href="/tags/es2015/">es2015</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/golang/">golang</a><small>3</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/tags/kubernetes/">kubernetes</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/log4net/">log4net</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>9</small></li>
+  
+    <li><a href="/tags/nginx/">nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/reactjs/">reactjs</a><small>4</small></li>
+  
+    <li><a href="/tags/redux/">redux</a><small>4</small></li>
+  
+    <li><a href="/tags/sentry/">sentry</a><small>1</small></li>
+  
+    <li><a href="/tags/vagrant/">vagrant</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">標籤雲</h3>
+  <div class="entry">
+    <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/CSharp/" style="font-size: 11.43px;">CSharp</a> <a href="/tags/EntityFramework/" style="font-size: 10px;">EntityFramework</a> <a href="/tags/IoC/" style="font-size: 10px;">IoC</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/OAuth2/" style="font-size: 10px;">OAuth2</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/VCS/" style="font-size: 10px;">VCS</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/architecture/" style="font-size: 11.43px;">architecture</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/backbonejs/" style="font-size: 10px;">backbonejs</a> <a href="/tags/ceph/" style="font-size: 10px;">ceph</a> <a href="/tags/devops/" style="font-size: 11.43px;">devops</a> <a href="/tags/docker/" style="font-size: 20px;">docker</a> <a href="/tags/dotnet/" style="font-size: 15.71px;">dotnet</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/electron/" style="font-size: 10px;">electron</a> <a href="/tags/es2015/" style="font-size: 10px;">es2015</a> <a href="/tags/git/" style="font-size: 12.86px;">git</a> <a href="/tags/golang/" style="font-size: 12.86px;">golang</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 17.14px;">javascript</a> <a href="/tags/kubernetes/" style="font-size: 10px;">kubernetes</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/log4net/" style="font-size: 10px;">log4net</a> <a href="/tags/mac/" style="font-size: 18.57px;">mac</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nodejs/" style="font-size: 12.86px;">nodejs</a> <a href="/tags/reactjs/" style="font-size: 14.29px;">reactjs</a> <a href="/tags/redux/" style="font-size: 14.29px;">redux</a> <a href="/tags/sentry/" style="font-size: 10px;">sentry</a> <a href="/tags/vagrant/" style="font-size: 10px;">vagrant</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 metavige (Ricky Chiang)
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'metavigegitpages';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
