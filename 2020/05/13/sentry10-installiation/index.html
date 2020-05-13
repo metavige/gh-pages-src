@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Sentry 10 onpromise installation | @metavige</title>
+  <title>Sentry 10 onpremise installation | @metavige</title>
   <meta name="author" content="metavige (Ricky Chiang)">
   
   <meta name="description" content="Log 紀錄，在 DevOps 的情境中，其實是一個很重要的項目，所有的系統在上線的時候，都應該要有適當的 Log 紀錄以方便後續的問題追蹤，尤其是在 Microservice 的設計上面  
 當你的服務或系統是以 docker container 的方式啟動，如果只是以 container stdout/stderr 的方式來取得紀錄，實際上後續的追蹤並不容易，所以我自己找了一下網路上的解決方案，找到了 sentry 的這套系統。
-而在公司內部使用，如果公司環境並不允許 Log 紀錄在外部的網站，就需要考慮 Self-Hosted 的建置，剛好 sentry 有提供 onpromise 的部分，就找了這個 source 來驗證一下在本地端建置 sentry 的步驟。">
+而在公司內部使用，如果公司環境並不允許 Log 紀錄在外部的網站，就需要考慮 Self-Hosted 的建置，剛好 sentry 有提供 onpremise 的部分，就找了這個 source 來驗證一下在本地端建置 sentry 的步驟。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Sentry 10 onpromise installation"/>
+  <meta property="og:title" content="Sentry 10 onpremise installation"/>
   <meta property="og:site_name" content="@metavige"/>
 
   
@@ -72,7 +72,7 @@
       
       
   
-    <h1 class="title">Sentry 10 onpromise installation</h1>
+    <h1 class="title">Sentry 10 onpremise installation</h1>
   
 
     </header>
@@ -80,17 +80,17 @@
       
         <p>Log 紀錄，在 DevOps 的情境中，其實是一個很重要的項目，所有的系統在上線的時候，都應該要有適當的 Log 紀錄<br>以方便後續的問題追蹤，尤其是在 Microservice 的設計上面  </p>
 <p>當你的服務或系統是以 <code>docker</code> container 的方式啟動，如果只是以 container stdout/stderr 的方式來取得紀錄，實際上後續的追蹤並不容易，所以我自己找了一下網路上的解決方案，找到了 <a href="https://sentry.io/" target="_blank" rel="noopener">sentry</a> 的這套系統。</p>
-<p>而在公司內部使用，如果公司環境並不允許 Log 紀錄在外部的網站，就需要考慮 Self-Hosted 的建置，剛好 sentry 有提供 onpromise 的部分，就找了這個 source 來驗證一下在本地端建置 sentry 的步驟。</p>
+<p>而在公司內部使用，如果公司環境並不允許 Log 紀錄在外部的網站，就需要考慮 Self-Hosted 的建置，剛好 sentry 有提供 onpremise 的部分，就找了這個 source 來驗證一下在本地端建置 sentry 的步驟。</p>
 <a id="more"></a>
 
 <h2 id="Self-Hosted-下載"><a href="#Self-Hosted-下載" class="headerlink" title="Self-Hosted 下載"></a>Self-Hosted 下載</h2><ul>
 <li>根據官方網站的說明，需要先下載 <a href="https://github.com/getsentry/onpremise" target="_blank" rel="noopener">onpremise</a> 的原始碼。  </li>
 <li>需要先安裝好 <code>docker</code> 跟 <code>docker-compose</code>，版本號可以參考原始碼中的 <code>README.md</code></li>
 </ul>
-<h2 id="建置-onpromise"><a href="#建置-onpromise" class="headerlink" title="建置 onpromise"></a>建置 onpromise</h2><ul>
+<h2 id="建置-onpremise"><a href="#建置-onpremise" class="headerlink" title="建置 onpremise"></a>建置 onpremise</h2><ul>
 <li>前置作業，其實是會先根據下載的原始碼，去 build sentry 的 image 出來</li>
-<li>可以直接執行 <code>./install.sh</code>，來直接建置 onpromise 的 image。不過如果要指定 sentry 版本的話，可以先設定好環境變數 <code>SENTRY_IMAGE=getsentry/sentry:10</code> 的方式，來建置 sentry v10 的 image。</li>
-<li>如果直接執行 <code>./install.sh</code>，會將 <code>sentry</code> 目錄下的 <code>config.example.yml</code> 以及 <code>sentry.conf.example.py</code> 複製成 <code>config.yml</code> 以及 <code>sentry.conf.py</code> 兩個檔案，並且開始建置 onpromise sentry image</li>
+<li>可以直接執行 <code>./install.sh</code>，來直接建置 onpremise 的 image。不過如果要指定 sentry 版本的話，可以先設定好環境變數 <code>SENTRY_IMAGE=getsentry/sentry:10</code> 的方式，來建置 sentry v10 的 image。</li>
+<li>如果直接執行 <code>./install.sh</code>，會將 <code>sentry</code> 目錄下的 <code>config.example.yml</code> 以及 <code>sentry.conf.example.py</code> 複製成 <code>config.yml</code> 以及 <code>sentry.conf.py</code> 兩個檔案，並且開始建置 onpremise sentry image</li>
 <li>建置完成之後，到最後一步，只要出現下面的訊息，就表示可以啟動 sentry 來使用了！</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">....</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Cleaning up...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">----------------</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">You&#39;re all done! Run the following command to get Sentry running:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  docker-compose up -d</span></pre></td></tr></table></figure>
